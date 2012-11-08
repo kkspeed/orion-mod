@@ -28,10 +28,6 @@ Notes
   in portrait mode before you start the reflow. Possibly landscape mode will be support
   in the future.
 
-* Currently only tested on Nook Simple Touch, no guarantee it will work on other
-  devices. The resolution is obviously hard coded in k2pdfopt's source file and it's
-  600 x 800.  Possible more options will be availbe in future.
-
 * The reflow will destory part of orion-viewer's  functionality:
   - Text selection: the reflow renders on a pure bitmap. Text selection can only be
     made available if the reflow is rendered in native pdf format or with OCR. The 
