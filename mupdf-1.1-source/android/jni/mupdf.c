@@ -61,11 +61,23 @@ Java_com_artifex_mupdf_MuPDFCore_setReflowParameters(JNIEnv *env,
                                                      int dpi,
                                                      int columns,
                                                      int bb_width,
-                                                     int bb_height)
+                                                     int bb_height,
+                                                     int m_top,
+                                                     int m_bottom,
+                                                     int m_left,
+                                                     int m_right)
 {
-    LOGE("========> zoom: %f, dpi: %d, columns: %d, width: %d, height: %d",
-         zoom, dpi, columns, bb_width, bb_height);
-    k2pdfopt_set_params_lite(zoom, dpi, columns, bb_width, bb_height);
+    double m_l = m_left / 100.0 * pageWidth;
+    double m_r = m_right / 100.0 * pageWidth;
+    double m_t = m_top / 100.0 * pageHeight;
+    double m_b = m_bottom / 100.0 * pageHeight;
+
+    LOGE("========> zoom: %f, dpi: %d, columns: %d, width: %d, height: %d"
+         "top: %f, bottom: %f, left: %f, right: %f",
+         zoom, dpi, columns, bb_width, bb_height, m_t, m_b, m_l, m_r);
+
+    k2pdfopt_set_params_lite(zoom, dpi, columns, bb_width, bb_height,
+                             m_t, m_b, m_l, m_r);
 }
 
 JNIEXPORT int JNICALL

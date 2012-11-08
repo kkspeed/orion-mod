@@ -267,6 +267,9 @@ public class OrionViewerActivity extends OrionBaseActivity {
 
             controller = new Controller(this, doc, str, view);
 
+            controller.setReflowParameters(1, 167, 2, lastPageInfo.screenWidth, lastPageInfo.screenHeight,
+                                           -1, -1, -1, -1);
+
             controller.changeOrinatation(lastPageInfo.screenOrientation);
 
             controller.init(lastPageInfo);
@@ -1242,10 +1245,35 @@ public class OrionViewerActivity extends OrionBaseActivity {
                     int dpi = Integer.parseInt(dsp.getSelectedItem().toString());
                     int columns = Integer.parseInt(edit.getText().toString());
 
+                    int[] m = new int[6];
+                    controller.getMargins(m);
+                    int m_left = (m[0] == 0) ? -1 :  m[0];
+                    int m_right = (m[1] == 0) ? -1 : m[1];
+                    int m_top = (m[2] == 0) ? -1 : m[2];
+                    int m_bottom = (m[3] == 0) ? -1 : m[3];
+
+                    cropBorders[0] = 0;
+                    cropBorders[1] = 0;
+                    cropBorders[2] = 0;
+                    cropBorders[3] = 0;
+                    cropBorders[4] = 0;
+                    cropBorders[5] = 0;
+
+                    CheckBox cb = (CheckBox) findMyViewById(R.id.reflow_dont_crop_box);
+
+                    if (cb.isChecked()) {
+                        m_left = m_right = m_top = m_bottom = 0;
+                    }
+
                     Common.d("Spinner: zoom: " + zoom + " dpi: " + dpi + " columns: " + columns);
+
                     controller.setReflowParameters(zoom, dpi, columns, lastPageInfo.screenWidth,
-                                                   lastPageInfo.screenHeight);
+                                                   lastPageInfo.screenHeight, m_top,
+                                                   m_bottom, m_left, m_right);
                     changeReflowMode();
+
+                    controller.changeMargins(cropBorders[0], cropBorders[2], cropBorders[1],
+                                             cropBorders[3], false, cropBorders[4], cropBorders[5]);
                     onAnimatorCancel();
                 }
             });

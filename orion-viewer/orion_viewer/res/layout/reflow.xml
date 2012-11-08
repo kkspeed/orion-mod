@@ -45,5 +45,15 @@
                   android:entries="@array/odpis"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textSize="25sp"
+                  android:gravity="left"
+                  android:text="@string/reflow_dont_crop"/>
+        <CheckBox android:id="@+id/reflow_dont_crop_box"
+                  android:checked="false"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"/>
+
     </LinearLayout>
 </LinearLayout>

@@ -108,7 +108,11 @@ public class DjvuDocument implements DocumentWrapper {
                                     int dpi,
                                     int columns,
                                     int bb_width,
-                                    int bb_height){
+                                    int bb_height,
+                                    int m_top,
+                                    int m_bottom,
+                                    int m_left,
+                                    int m_right) {
     }
 
     public native void setContrast(int contrast);

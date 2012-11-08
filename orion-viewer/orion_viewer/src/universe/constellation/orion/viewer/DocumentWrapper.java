@@ -54,7 +54,11 @@ public interface DocumentWrapper {
                              int dpi,
                              int columns,
                              int bb_width,
-                             int bb_height);
+                             int bb_height,
+                             int m_top,
+                             int m_bottom,
+                             int m_left,
+                             int m_right);
 
 	public OutlineItem[] getOutline();
 }

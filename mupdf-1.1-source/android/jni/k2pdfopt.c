@@ -531,12 +531,22 @@ static void k2pdfopt_reflow_bmp(MASTERINFO *masterinfo, WILLUSBITMAP *src)
 }
 
 void k2pdfopt_set_params_lite(double zoom, int dpi, int columns,
-                              int bb_width, int bb_height) {
+                              int bb_width, int bb_height, 
+                              double m_top, double m_bottom, double m_left, 
+                              double m_right) {
     zoom_value = zoom;
     dst_dpi = dpi;
 	dst_userwidth = bb_width;
 	dst_userheight = bb_height;
     max_columns = columns;
+
+    mar_top =  m_top / dst_dpi;
+    mar_bot = m_bottom / dst_dpi;
+    mar_left = m_left / dst_dpi;
+    mar_right = m_right / dst_dpi;
+
+    __android_log_print(ANDROID_LOG_INFO, "K2OPT>> ", "Margins: t: %f b: %f l: %f r: %f", 
+            mar_top, mar_bot, mar_left, mar_right);
 }
 
 void k2pdfopt_set_params(int bb_width, int bb_height, \

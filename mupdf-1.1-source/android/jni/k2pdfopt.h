@@ -32,7 +32,9 @@ void k2pdfopt_set_params(int bb_width, int bb_height, \
 		int wrapping, int straighten, int justification, \
 		int columns, double contrast, int rotation);
 void k2pdfopt_set_params_lite(double zoom, int dpi, int columns,
-                              int bb_width, int bb_height);
+                              int bb_width, int bb_height, 
+                              double m_top, double m_bottom, double m_left,
+                              double m_right);
 void k2pdfopt_mupdf_reflow(fz_document *doc, fz_page *page, fz_context *ctx
       );
 //void k2pdfopt_djvu_reflow(ddjvu_page_t *page, ddjvu_context_t *ctx, ddjvu_render_mode_t mode, ddjvu_format_t *fmt);

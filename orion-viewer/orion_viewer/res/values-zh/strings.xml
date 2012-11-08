@@ -50,6 +50,7 @@
     <string name="reflow_output_dpi">输出DPI</string>
     <string name="reflow_indent">保留缩进</string>
     <string name="reflow_columns">最大列数</string>
+    <string name="reflow_dont_crop">不要切边</string>
 
 
     <string name="orientation_default">默认</string>
