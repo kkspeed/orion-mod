@@ -46,6 +46,8 @@
     <string name="long_click">On long click</string>
     <string name="short_click">On short click</string>
     <string name="binding_click">On binding</string>
+    <string name="reflow_zoom">Zoom</string>
+    <string name="reflow_output_dpi">Output DPI</string>
 
 
     <string name="orientation_default">Default</string>

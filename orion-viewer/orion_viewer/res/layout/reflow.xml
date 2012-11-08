@@ -10,7 +10,7 @@
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:textSize="25sp"
-                  android:gravity="left|center_vertical" android:text="缩放"/>
+                  android:gravity="left|center_vertical" android:text="@string/reflow_zoom"/>
         <Spinner  android:id="@+id/reflow_zoom_spinner"
                   android:entries="@array/reflow_zooms"
                   android:layout_width="wrap_content"
@@ -22,7 +22,7 @@
                   android:layout_height="wrap_content"
                   android:textSize="25sp"
                   android:gravity="left|center_vertical"
-                  android:text="输出DPI"/>
+                  android:text="@string/reflow_output_dpi"/>
         <Spinner  android:id="@+id/reflow_dpi_spinner"
                   android:entries="@array/odpis"
                   android:layout_width="wrap_content"

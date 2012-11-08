@@ -46,6 +46,8 @@
     <string name="long_click">长按时</string>
     <string name="short_click">短按时</string>
     <string name="binding_click">绑定</string>
+    <string name="reflow_zoom">缩放</string>
+    <string name="reflow_output_dpi">输出DPI</string>
 
 
     <string name="orientation_default">默认</string>
