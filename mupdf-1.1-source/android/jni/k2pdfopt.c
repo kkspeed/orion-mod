@@ -530,9 +530,13 @@ static void k2pdfopt_reflow_bmp(MASTERINFO *masterinfo, WILLUSBITMAP *src)
 	bmp_free(srcgrey);
 }
 
-void k2pdfopt_set_params_lite(double zoom, int dpi) {
+void k2pdfopt_set_params_lite(double zoom, int dpi, int columns,
+                              int bb_width, int bb_height) {
     zoom_value = zoom;
     dst_dpi = dpi;
+	dst_userwidth = bb_width;
+	dst_userheight = bb_height;
+    max_columns = columns;
 }
 
 void k2pdfopt_set_params(int bb_width, int bb_height, \

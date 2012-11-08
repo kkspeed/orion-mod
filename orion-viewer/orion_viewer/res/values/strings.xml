@@ -48,6 +48,8 @@
     <string name="binding_click">On binding</string>
     <string name="reflow_zoom">Zoom</string>
     <string name="reflow_output_dpi">Output DPI</string>
+    <string name="reflow_indent">Preserve Indentation</string>
+    <string name="reflow_columns">Maximum Columns</string>
 
 
     <string name="orientation_default">Default</string>

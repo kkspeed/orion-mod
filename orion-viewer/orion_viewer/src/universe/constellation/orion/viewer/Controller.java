@@ -308,8 +308,13 @@ public class Controller {
         return this.reflow;
     }
 
-    public void setReflowParameters(float zoom, int dpi) {
-        doc.setReflowParameters(zoom, dpi);
+
+    void setReflowParameters(float zoom,
+                             int dpi,
+                             int columns,
+                             int bb_width,
+                             int bb_height) {
+        doc.setReflowParameters(zoom, dpi, columns, bb_width, bb_height);
     }
 
     public void setReflow(int reflow) {

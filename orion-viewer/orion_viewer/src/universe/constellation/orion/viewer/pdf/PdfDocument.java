@@ -75,8 +75,12 @@ public class PdfDocument implements DocumentWrapper {
         core.setReflow(reflow);
     }
 
-    public void setReflowParameters(float zoom, int dpi) {
-        core.setReflowParameters(zoom, dpi);
+    public void setReflowParameters(float zoom,
+                                    int dpi,
+                                    int columns,
+                                    int bb_width,
+                                    int bb_height) {
+        core.setReflowParameters(zoom, dpi, columns, bb_width, bb_height);
     }
 
 	public void setThreshold(int threshold) {

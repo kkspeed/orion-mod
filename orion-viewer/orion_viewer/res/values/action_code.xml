@@ -49,7 +49,7 @@
     <integer name="action_open_bookmarks">16</integer>
 
     <integer name="action_day_night_mode">17</integer>
-    <integer name="action_reflow_mode">100</integer>
+    <integer name="action_reflow_mode">500</integer>
 
     <integer name="action_book_options">18</integer>
 

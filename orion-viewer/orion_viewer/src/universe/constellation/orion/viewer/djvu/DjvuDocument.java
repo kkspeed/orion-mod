@@ -104,8 +104,11 @@ public class DjvuDocument implements DocumentWrapper {
 
     }
 
-    public void setReflowParameters(float zoom, int dpi) {
-
+    public void setReflowParameters(float zoom,
+                                    int dpi,
+                                    int columns,
+                                    int bb_width,
+                                    int bb_height){
     }
 
     public native void setContrast(int contrast);

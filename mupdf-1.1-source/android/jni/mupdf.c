@@ -55,11 +55,17 @@ JNICALL Java_com_artifex_mupdf_MuPDFCore_setReflow(JNIEnv * env, jobject thiz,
 }
 
 JNIEXPORT jintArray JNICALL
-Java_com_artifex_mupdf_MuPDFCore_setReflowParameters(JNIEnv *env, jobject thiz, float zoom,
-		int dpi)
+Java_com_artifex_mupdf_MuPDFCore_setReflowParameters(JNIEnv *env,
+                                                     jobject thiz,
+                                                     float zoom,
+                                                     int dpi,
+                                                     int columns,
+                                                     int bb_width,
+                                                     int bb_height)
 {
-    LOGE("================> zoom: %f, dpi: %d\n", zoom, dpi);
-    k2pdfopt_set_params_lite(zoom, dpi);
+    LOGE("========> zoom: %f, dpi: %d, columns: %d, width: %d, height: %d",
+         zoom, dpi, columns, bb_width, bb_height);
+    k2pdfopt_set_params_lite(zoom, dpi, columns, bb_width, bb_height);
 }
 
 JNIEXPORT int JNICALL

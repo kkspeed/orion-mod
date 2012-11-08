@@ -1,31 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout android:layout_width="fill_parent"
-             android:layout_height="wrap_content"
-             xmlns:android="http://schemas.android.com/apk/res/android"
-             android:shrinkColumns="1"
-             android:id="@+id/reflow_page"
-             android:gravity="center">
+<LinearLayout android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:orientation="vertical"
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              android:shrinkColumns="1"
+              android:id="@+id/reflow_page"
+              android:gravity="center">
 
-    <TableRow android:gravity="center">
+    <LinearLayout android:gravity="left"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content">
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:textSize="25sp"
-                  android:gravity="left|center_vertical" android:text="@string/reflow_zoom"/>
+                  android:gravity="left"
+                  android:text="@string/reflow_zoom"/>
         <Spinner  android:id="@+id/reflow_zoom_spinner"
                   android:entries="@array/reflow_zooms"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"/>
-    </TableRow>
-
-    <TableRow android:gravity="center">
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:textSize="25sp"
-                  android:gravity="left|center_vertical"
+                  android:gravity="left"
+                  android:text="@string/reflow_columns"/>
+        <EditText
+            android:id="@+id/reflow_columns_edit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:defaultValue="2"
+            android:text="2"
+            android:numeric="integer"/>
+    </LinearLayout>
+
+    <LinearLayout android:gravity="left"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content">
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textSize="25sp"
+                  android:gravity="left"
                   android:text="@string/reflow_output_dpi"/>
         <Spinner  android:id="@+id/reflow_dpi_spinner"
                   android:entries="@array/odpis"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"/>
-    </TableRow>
-</TableLayout>
+    </LinearLayout>
+</LinearLayout>

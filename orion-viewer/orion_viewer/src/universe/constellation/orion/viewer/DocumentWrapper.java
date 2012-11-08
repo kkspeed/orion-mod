@@ -50,7 +50,11 @@ public interface DocumentWrapper {
 
     void setReflow(int reflow);
 
-    void setReflowParameters(float zoom, int dpi);
+    void setReflowParameters(float zoom,
+                             int dpi,
+                             int columns,
+                             int bb_width,
+                             int bb_height);
 
 	public OutlineItem[] getOutline();
 }

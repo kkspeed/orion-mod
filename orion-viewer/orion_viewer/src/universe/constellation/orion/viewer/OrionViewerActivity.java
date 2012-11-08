@@ -1237,11 +1237,14 @@ public class OrionViewerActivity extends OrionBaseActivity {
                 public void onClick(View view) {
                     final Spinner zsp = (Spinner) findMyViewById(R.id.reflow_zoom_spinner);
                     final Spinner dsp = (Spinner) findMyViewById(R.id.reflow_dpi_spinner);
-
+                    final EditText edit = (EditText) findMyViewById(R.id.reflow_columns_edit);
                     float zoom = Float.parseFloat(zsp.getSelectedItem().toString());
                     int dpi = Integer.parseInt(dsp.getSelectedItem().toString());
-                    Common.d("Spinner: zoom: " + zoom + " dpi: " + dpi);
-                    controller.setReflowParameters(zoom, dpi);
+                    int columns = Integer.parseInt(edit.getText().toString());
+
+                    Common.d("Spinner: zoom: " + zoom + " dpi: " + dpi + " columns: " + columns);
+                    controller.setReflowParameters(zoom, dpi, columns, lastPageInfo.screenWidth,
+                                                   lastPageInfo.screenHeight);
                     changeReflowMode();
                     onAnimatorCancel();
                 }

@@ -97,5 +97,9 @@ public class MuPDFCore
     public native void setContrast(int contrast);
 	public native void setThreshold(int threshold);
 	public native synchronized void setReflow(int reflow);
-    public native void setReflowParameters(float zoom, int dpi);
+    public native void setReflowParameters(float zoom,
+                                           int dpi,
+                                           int columns,
+                                           int bb_width,
+                                           int bb_height);
 }
