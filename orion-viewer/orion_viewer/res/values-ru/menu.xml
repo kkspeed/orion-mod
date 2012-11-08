@@ -1,0 +1,47 @@
+<!--
+  ~ Orion Viewer - pdf, djvu, xps and cbz file viewer for android devices
+  ~
+  ~ Copyright (C) 2011-2012  Michael Bogdanov
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+    <string name="menu_zoom_text">Масштаб</string>
+    <string name="menu_crop_text">Обрезка полей</string>
+    <string name="menu_goto_text">Перейти...</string>
+    <string name="menu_bookmarks_text">Закладки</string>
+    <string name="menu_add_bookmark_item">Добавить закладку</string>
+    <string name="menu_rotation_text">Ориентация экрана</string>
+    <string name="menu_navigation_text">Раскладка страницы</string>
+    <string name="menu_help_text">Помощь</string>
+    <string name="menu_open_text">Открыть книгу</string>
+    <string name="menu_open_dictionary_text">Открыть словарь</string>
+    <string name="menu_day_night_text">Дневной/Ночной режим</string>
+    <string name="menu_exit_text">Закрыть</string>
+    <string name="menu_key_binder_text">Назначение клавиш</string>
+    <string name="menu_options_text">Настройки</string>
+    <string name="menu_tap_text">Тап зоны</string>
+
+    <string name="menu_book_preferences">Настройки книги</string>
+    <string name="menu_outline_text">Содержание</string>
+
+    <string name="menu_select_text">Выделить текст</string>
+    <string name="menu_book_preferences">Настройки книги</string>
+
+    <string name="export_all_bookmarks_menu_item">Экспортировать все закладки</string>
+    <string name="export_bookmarks_menu_item">Экспортировать текущие закладки</string>
+    <string name="import_all_bookmarks_menu_item">Импортировать...</string>
+    <string name="import_current_bookmarks_menu_item">Дополнить из...</string>
+</resources>

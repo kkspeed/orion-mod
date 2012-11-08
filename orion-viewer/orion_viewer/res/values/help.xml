@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Orion Viewer - pdf, djvu, xps and cbz file viewer for android devices
+  ~
+  ~ Copyright (C) 2011-2012  Michael Bogdanov
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+    <string name="zoom">Opens zoom dialog. Zero zoom value means zooming by width.</string>
+    <string name="rotation">Rotates document to the 90 degree clockwise. Long click rotates counterclockwise.</string>
+    <string name="rotation_android">Opens rotation dialog.</string>
+
+    <string name="crop">Opens borders crop dialog. Values defined relative to page size. Long click for plus or minus in this dialog changes crop value for 10%. Negative value add additional borders.</string>
+
+    <string name="next_page_android">Opens go to dialog.</string>
+
+    <string name="next_page">Go to next page. On long click opens bookmark screen.</string>
+
+    <string name="prev_page">Go to prev page. On long click opens page chooser dialog.</string>
+
+    <string name="apply">Apply current options.</string>
+    <string name="escape">Return/Escape.</string>
+
+    <string name="general_usage">How to use:</string>
+
+    <string name="general_usage_step1">1. Open document (zoom by width by default)
+        </string>
+
+    <string name="general_usage_step2">
+        2. Select appropriate orientation: portrait or landscape
+        </string>
+
+    <string name="general_usage_step3">
+        3. Crop borders, text size will be changed accordingly to changing borders (if zoom by width specified)
+        </string>
+
+    <string name="general_usage_step4">
+        4. Enjoy reading!</string>
+
+    <!--<string name="help_taps">-->
+        <!--Click on screen - go to next page, long click - go to prev page.</string>-->
+
+    <string name="option_help">
+        Application parameters</string>
+
+    <string name="navigation_help">
+        Opens page layot dialog. On reading comics or viewing books with images you could select appropriate page layout.</string>
+
+    <string name="dictionary_help">
+        Opens External Dictionary. Choose appropriate Dictionary application in Options.</string>
+
+    <string name="tap_help">
+        Tap zones allow user to link different parts of device screen to commonly used commands.
+        There are 3x3 cells where user could define actions for short (top label) and long (bottom label) clicks.</string>
+
+    <string name="bookmarks_export_help">
+        Allow user to export bookmarks (for all books or for current one).
+        Bookmarks are exported to xml file with the name of opened book + [bookmarks.xml or all_bookmarks.xml] suffix.
+        This option is avaliable at Bookmarks screen menu.</string>
+</resources>

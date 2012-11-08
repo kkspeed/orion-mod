@@ -1,0 +1,105 @@
+===== 0.38.5 (Oct 29, 2012) =====
+* Fixed "Append" import for bookmarks
+
+===== 0.38.3 (Oct 21, 2012) =====
+* Issue 30: New default options problem in Nook Classic
+* Issue 35: Crash on view djvu contents
+* Issue 21: Feature request: standby settings - Added screen backlight timeout option
+
+===== 0.38.1 (Oct 11, 2012) =====
+* Bookmarks Edit/Delete actions
+* Localizations update
+
+===== 0.38.0 (Oct 8, 2012) =====
+* Bookmarks Export/Import
+* Hebrew Localization by Alexander Goldberg
+* New Icons
+
+===== 0.37.1 (Sep 14, 2012) =====
+* Labels and warnings update
+
+===== 0.37.0 (Sep 08, 2012) =====
+* Text selection in djvu document (one screen & edge devices)
+* New page traversal: from right to left
+* New default options for book
+
+===== 0.35.0 (Aug 25, 2012) =====
+* Text selection in pdf document (one screen & edge devices)
+* Options update
+
+===== 0.34.1 (July 22, 2012) =====
+* Outline
+* Default zoom option
+* Issie-27: problems on nook 1st edition
+
+===== 0.31.2 (June 2, 2012) =====
+* Intents for viewing xps and cbz
+* Some new localizations
+* Small fixes
+
+===== 0.31.1 (May 24, 2012) =====
+* Contrast option
+
+===== 0.31.0 (May 8, 2012) =====
+* Mupdf lib updated to version 1.0
+* Xps and cbz files support
+* New key manager/binder dialog (now avaliable from options)
+* Italian translation by Alberto Pettarin
+
+===== 0.29.3 (Mar 27, 2012) =====
+* New Rotation Dialog
+
+===== 0.29.0 (Mar 13, 2012) =====
+* Zoom dialog update: new zoom option - fit width, fit height, fit page
+
+===== 0.28.0 (Mar 17, 2012) =====
+* Even/odd page cropping
+* Installation on sd card
+
+===== 0.27.3 (Mar 2, 2012) =====
+* Help update
+* Small fixes
+* Day/Night mode
+
+===== 0.27.2 (Feb 29, 2012) =====
+* Bookmarks export
+
+===== 0.27.1 (Feb 26, 2012) =====
+* Added Bookmarks
+
+===== 0.26.2 (Feb 4, 2012) =====
+* Fixed dictionary invocation on alex and nook
+* Fixed key binding crash in 0.26.*
+
+===== 0.26.0 (Jan 27, 2012) =====
+* Customizable screen brightness
+* Custom screen overlapping on page turn
+* Dark and Light application Themes
+* New crop actions added
+* Open recent book on start up option
+
+===== 0.25.7 (Jan 22, 2012) =====
+* Help tuning
+* Tap zones improvement
+* New action for taps
+
+===== 0.25.3 (Jan 13, 2012) =====
+* Tap zones feature in Android build
+* External dictionaries support
+* Fixed bug with relative cropping
+
+===== 0.25.0 (Jan 5, 2012) =====
+ * Fixed issue with blank page on attempt to render rotated pdf document
+ * Border cropping relative to page size
+ * Added full screen mode (not works on Alex: Is anybody know how support full epd screen on Alex?)
+ * Added new options
+
+===== 0.24.0 (Dec 12, 2011) =====
+* Djvu support
+
+===== 0.16.0 (Nov 26, 2011) =====
+* FileManager keeps last opened folder on startup
+* Recently opened files view added to FileManager
+* Fixed issue with refreshing crop screen
+* Added Russian localization
+* Added negative cropping (add additional borders)

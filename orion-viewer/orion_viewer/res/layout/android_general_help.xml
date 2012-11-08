@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Orion Viewer - pdf, djvu, xps and cbz file viewer for android devices
+  ~
+  ~ Copyright (C) 2011-2012  Michael Bogdanov
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/general_help"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:isScrollContainer="true"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            android:scrollbarStyle="outsideInset"
+            android:scrollbars="vertical"
+            android:orientation="vertical">
+
+        <TableLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+                     android:shrinkColumns="1">
+
+            <TextView android:textSize="20sp"
+                      android:layout_width="fill_parent" android:layout_height="wrap_content"
+                      android:text="@string/general_usage"
+                      android:layout_gravity="center_vertical"
+                      android:gravity="left" android:paddingLeft="10px" android:paddingRight="10px"/>
+
+
+            <TextView android:textSize="20sp"
+                      android:layout_width="fill_parent" android:layout_height="wrap_content"
+                      android:text="@string/general_usage_step1"
+                      android:layout_gravity="center_vertical"
+                      android:gravity="left" android:paddingLeft="20px" android:paddingRight="10px"/>
+
+            <TextView android:textSize="20sp"
+                      android:layout_width="fill_parent" android:layout_height="wrap_content"
+                      android:text="@string/general_usage_step2"
+                      android:layout_gravity="center_vertical"
+                      android:gravity="left" android:paddingLeft="20px" android:paddingRight="10px"/>
+
+            <TextView android:textSize="20sp"
+                      android:layout_width="fill_parent" android:layout_height="wrap_content"
+                      android:text="@string/general_usage_step3"
+                      android:layout_gravity="center_vertical"
+                      android:gravity="left" android:paddingLeft="20px" android:paddingRight="10px"/>
+
+            <TextView android:textSize="20sp"
+                      android:layout_width="fill_parent" android:layout_height="wrap_content"
+                      android:text="@string/general_usage_step4"
+                      android:layout_gravity="center_vertical"
+                      android:gravity="left" android:paddingLeft="20px" android:paddingRight="10px"/>
+
+            <!--<TextView android:textSize="20sp"-->
+                      <!--android:layout_width="fill_parent" android:layout_height="wrap_content"-->
+                      <!--android:text="@string/help_taps"-->
+                      <!--android:layout_gravity="center_vertical"-->
+                      <!--android:gravity="left" android:paddingLeft="10px" android:paddingRight="10px"/>-->
+
+            <TableRow>
+                <ImageView android:layout_column="0"
+                           android:layout_width="wrap_content" android:layout_height="wrap_content"
+                           android:src="@drawable/zoom"/>
+                <TextView android:textSize="20sp"
+                          android:layout_width="fill_parent" android:layout_height="wrap_content"
+                          android:text="@string/zoom"
+                          android:layout_gravity="center_vertical"
+                          android:gravity="left"/>
+            </TableRow>
+
+            <TableRow>
+                <ImageView android:layout_column="0"
+                           android:layout_width="wrap_content" android:layout_height="wrap_content"
+                           android:src="@drawable/rotate"/>
+
+                <TextView android:layout_width="fill_parent" android:layout_height="wrap_content"
+                          android:textSize="20sp" android:id="@+id/help_rotation_entry"
+                          android:text="@string/rotation"
+                          android:layout_gravity="center_vertical"
+                          android:gravity="left"/>
+            </TableRow>
+
+            <TableRow>
+                <ImageView android:layout_column="0"
+                           android:layout_width="wrap_content" android:layout_height="wrap_content"
+                           android:src="@drawable/crop"/>
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:textSize="20sp"
+                          android:text="@string/crop"
+                          android:layout_gravity="center_vertical"
+                          android:gravity="left"/>
+            </TableRow>
+
+            <TableRow>
+                <ImageView android:layout_column="0"
+                           android:layout_width="wrap_content" android:layout_height="wrap_content"
+                           android:src="@drawable/next"/>
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:textSize="20sp" android:id="@+id/help_next_page_entry"
+                          android:text="@string/next_page"
+                          android:layout_gravity="center_vertical"
+                          android:gravity="left"/>
+            </TableRow>
+
+            <TableRow android:id="@+id/help_prev_page_row">
+                <ImageView android:layout_column="0"
+                           android:layout_width="wrap_content" android:layout_height="wrap_content"
+                           android:src="@drawable/prev"/>
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:textSize="20sp"
+                          android:text="@string/prev_page"
+                          android:layout_gravity="center_vertical"
+                          android:gravity="left"/>
+            </TableRow>
+
+            <TableRow>
+                <ImageView android:layout_column="0"
+                           android:layout_width="wrap_content" android:layout_height="wrap_content"
+                           android:src="@drawable/navigation"/>
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:textSize="20sp"
+                          android:text="@string/navigation_help"
+                          android:layout_gravity="center_vertical"
+                          android:gravity="left"/>
+            </TableRow>
+
+            <TableRow>
+                <ImageView android:layout_column="0"
+                           android:layout_width="wrap_content" android:layout_height="wrap_content"
+                           android:src="@drawable/dictionary"/>
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:textSize="20sp"
+                          android:text="@string/dictionary_help"
+                          android:layout_gravity="center_vertical"
+                          android:gravity="left"/>
+            </TableRow>
+
+            <TableRow>
+                <ImageView android:layout_column="0"
+                           android:layout_width="wrap_content" android:layout_height="wrap_content"
+                           android:src="@drawable/options"/>
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:textSize="20sp"
+                          android:text="@string/option_help"
+                          android:layout_gravity="center_vertical"
+                          android:gravity="left"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_column="0"
+                          android:text="Taps"
+                          android:gravity="center_horizontal"/>
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:textSize="20sp"
+                          android:text="@string/tap_help"
+                          android:layout_gravity="center_vertical"
+                          android:gravity="left"/>
+            </TableRow>
+
+            <TableRow>
+                <ImageView android:layout_column="0"
+                           android:layout_width="wrap_content" android:layout_height="wrap_content"
+                           android:src="@drawable/export_bookmarks"/>
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:textSize="20sp"
+                          android:text="@string/bookmarks_export_help"
+                          android:layout_gravity="center_vertical"
+                          android:gravity="left"/>
+            </TableRow>
+
+
+            <TableRow>
+                <ImageView android:layout_column="0"
+                           android:layout_width="wrap_content" android:layout_height="wrap_content"
+                           android:src="@drawable/view"/>
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:textSize="20sp"
+                          android:text="@string/apply"
+                          android:layout_gravity="center_vertical"
+                          android:gravity="left"/>
+            </TableRow>
+
+
+            <TableRow>
+                <ImageView android:layout_column="0"
+                           android:layout_width="wrap_content" android:layout_height="wrap_content"
+                           android:src="@drawable/revert"/>
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:textSize="20sp"
+                          android:text="@string/escape"
+                          android:layout_gravity="center_vertical"
+                          android:gravity="left"/>
+            </TableRow>
+
+            <LinearLayout android:layout_height="fill_parent" android:orientation="horizontal"
+                      android:layout_width="fill_parent" android:gravity="right">
+                <ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content"
+                         android:src="@drawable/revert"
+                         android:id="@+id/help_close" android:layout_gravity="right"/>
+            </LinearLayout>
+        </TableLayout>
+
+</ScrollView>

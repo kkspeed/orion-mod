@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+             xmlns:android="http://schemas.android.com/apk/res/android"
+             android:shrinkColumns="1"
+             android:id="@+id/reflow_page"
+             android:gravity="center">
+
+    <TableRow android:gravity="center">
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textSize="25sp"
+                  android:gravity="left|center_vertical" android:text="缩放"/>
+        <Spinner  android:id="@+id/reflow_zoom_spinner"
+                  android:entries="@array/reflow_zooms"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"/>
+    </TableRow>
+
+    <TableRow android:gravity="center">
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textSize="25sp"
+                  android:gravity="left|center_vertical"
+                  android:text="输出DPI"/>
+        <Spinner  android:id="@+id/reflow_dpi_spinner"
+                  android:entries="@array/odpis"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"/>
+    </TableRow>
+</TableLayout>

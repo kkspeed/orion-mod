@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Orion Viewer - pdf, djvu, xps and cbz file viewer for android devices
+  ~
+  ~ Copyright (C) 2011-2012  Michael Bogdanov
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+    <integer name="action_none">0</integer>
+    <integer name="action_menu">1</integer>
+    <integer name="action_next_page">2</integer>
+    <integer name="action_prev_page">3</integer>
+    <!--new 20, 21-->
+    <integer name="action_first_page">20</integer>
+    <integer name="action_last_page">21</integer>
+
+
+    <integer name="action_zoom_page">4</integer>
+    <!--new 19-->
+    <integer name="action_page_layout">19</integer>
+    <integer name="action_crop_page">5</integer>
+    <integer name="action_options_page">6</integer>
+    <integer name="action_goto_page">7</integer>
+    <integer name="action_rotation_page">8</integer>
+
+    <integer name="action_dictionary">9</integer>
+    <integer name="action_open_book">10</integer>
+
+    <integer name="action_next_10">11</integer>
+    <integer name="action_prev_10">12</integer>
+
+    <integer name="action_rotate_90">13</integer>
+    <integer name="action_rotate_270">14</integer>
+
+    <integer name="action_add_bookmark">15</integer>
+    <integer name="action_open_bookmarks">16</integer>
+
+    <integer name="action_day_night_mode">17</integer>
+    <integer name="action_reflow_mode">100</integer>
+
+    <integer name="action_book_options">18</integer>
+
+    <!--crop margins-->
+    <integer name="action_crop_left">31</integer>
+    <integer name="action_crop_right">32</integer>
+    <integer name="action_crop_top">33</integer>
+    <integer name="action_crop_bottom">34</integer>
+
+
+    <!--increase margins-->
+    <integer name="action_uncrop_left">35</integer>
+    <integer name="action_uncrop_right">36</integer>
+    <integer name="action_uncrop_top">37</integer>
+    <integer name="action_uncrop_bottom">38</integer>
+
+    <integer name="action_inverse_crop">39</integer>
+    <integer name="action_switch_long_crop">40</integer>
+
+    <integer name="action_open_outline">41</integer>
+    <integer name="action_select_text">42</integer>
+</resources>

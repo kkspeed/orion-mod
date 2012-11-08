@@ -1,0 +1,1 @@
+typedef struct Arraylist_Struct * Arraylist;

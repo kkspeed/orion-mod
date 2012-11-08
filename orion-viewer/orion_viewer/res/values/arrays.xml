@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Orion Viewer - pdf, djvu, xps and cbz file viewer for android devices
+  ~
+  ~ Copyright (C) 2011-2012  Michael Bogdanov
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+    <string-array name="orientation">
+        <item>0</item>
+        <item>90</item>
+        <item>270</item>
+  </string-array>
+    <string-array name="orientation_desc">
+        <item>@string/rotate_0</item>
+        <item>@string/rotate_90</item>
+        <item>@string/rotate_270</item>
+  </string-array>
+
+    <string-array name="screen_orientation">
+        <item>DEFAULT</item>
+        <item>PORTRAIT</item>
+        <item>LANDSCAPE</item>
+    </string-array>
+
+    <string-array name="screen_orientation_full">
+        <item>DEFAULT</item>
+        <item>PORTRAIT</item>
+        <item>LANDSCAPE</item>
+        <item>PORTRAIT_INVERSE</item>
+        <item>LANDSCAPE_INVERSE</item>
+    </string-array>
+
+
+    <string-array name="screen_orientation_desc">
+        <item>@string/orientation_default</item>
+        <item>@string/orientation_portrait</item>
+        <item>@string/orientation_landscape</item>
+    </string-array>
+
+    <string-array name="screen_orientation_full_desc">
+        <item>@string/orientation_default</item>
+        <item>@string/orientation_portrait</item>
+        <item>@string/orientation_landscape</item>
+        <item>@string/orientation_portrait_inverse</item>
+        <item>@string/orientation_landscape_inverse</item>
+    </string-array>
+
+    <string-array name="fits">
+        <item>@string/fit_custom</item>
+        <item>@string/fit_width</item>
+        <item>@string/fit_height</item>
+        <item>@string/fit_page</item>
+    </string-array>
+
+    <string-array name="reflow_zooms">
+        <item>1</item>
+        <item>1.5</item>
+        <item>2</item>
+        <item>2.5</item>
+        <item>3</item>
+        <item>3.5</item>
+        <item>4</item>
+        <item>4.5</item>
+    </string-array>
+
+    <string-array name="odpis">
+        <item>167</item>
+        <item>100</item>
+        <item>200</item>
+        <item>300</item>
+        <item>400</item>
+        <item>500</item>
+        <item>600</item>
+        <item>700</item>
+    </string-array>
+
+    <string-array name="default_zoom_option">
+        <item>0</item>
+        <item>-1</item>
+        <item>-2</item>
+    </string-array>
+
+    <string-array name="default_zoom_option_desc">
+            <item>@string/fit_width</item>
+            <item>@string/fit_height</item>
+            <item>@string/fit_page</item>
+    </string-array>
+
+    <string-array name="dictionaries">
+        <item>FORA</item>
+        <item>COLORDICT</item>
+        <item>AARD</item>
+  </string-array>
+    <string-array name="dictionaries_desc">
+        <item>Fora Dictionary</item>
+        <item>Color Dict/Golden Dict</item>
+        <item>Aard Dictionary</item>
+  </string-array>
+
+    <string-array name="application_theme">
+        <item>DEFAULT</item>
+        <item>DARK</item>
+        <item>LIGHT</item>
+  </string-array>
+
+    <string-array name="application_theme_desc">
+        <item>DEFAULT</item>
+        <item>DARK</item>
+        <item>LIGHT</item>
+    </string-array>
+
+    <string-array name="screen_backligth_timeout">
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
+        <item>25</item>
+        <item>30</item>
+    </string-array>
+
+    <string-array name="screen_backligth_timeout_desc">
+        <item>5 minutes</item>
+        <item>10 minutes</item>
+        <item>15 minutes</item>
+        <item>20 minutes</item>
+        <item>25 minutes</item>
+        <item>30 minutes</item>
+    </string-array>
+
+    <string-array name="walk_orders_desc">
+        <item>@string/ABCD</item>
+        <item>@string/ACBD</item>
+        <item>@string/BADC</item>
+        <item>@string/BDAC</item>
+    </string-array>
+
+    <string-array name="walk_orders">
+        <item>@string/ABCD</item>
+        <item>@string/ACBD</item>
+        <item>@string/BADC</item>
+        <item>@string/BDAC</item>
+    </string-array>
+
+    <string-array name="page_layouts">
+        <item>@integer/layout_right_bottom_outside</item>
+        <item>@integer/layout_only_bottom_outside</item>
+        <item>@integer/layout_always_inside</item>
+    </string-array>
+</resources>

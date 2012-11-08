@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Orion Viewer - pdf, djvu, xps and cbz file viewer for android devices
+  ~
+  ~ Copyright (C) 2011-2012  Michael Bogdanov
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:orion="http://schemas.android.com/apk/res/universe.constellation.orion.viewer"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" android:orientation="vertical" android:gravity="center"
+            android:scrollbars="vertical" android:fillViewport="true">
+
+
+    <LinearLayout android:layout_height="fill_parent" android:orientation="vertical"
+                  android:layout_width="fill_parent" android:gravity="center">
+
+        <HorizontalScrollView android:layout_height="wrap_content" android:layout_width="fill_parent">
+
+            <LinearLayout android:layout_height="fill_parent" android:orientation="vertical"
+                          android:layout_width="fill_parent" android:gravity="center">
+
+                <RadioGroup android:id="@+id/layoutGroup" android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal" android:gravity="center">
+
+                    <RadioButton android:id="@+id/layout1"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"/>
+
+                    <ImageButton android:id="@+id/ilayout1"
+                                 android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                 android:clickable="false"
+                                 android:src="@drawable/navigation1" android:layout_gravity="center"/>
+
+                    <RadioButton android:id="@+id/layout2"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"/>
+
+                    <ImageButton android:id="@+id/ilayout2"
+                                 android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                 android:clickable="false"
+                                 android:src="@drawable/navigation2"/>
+
+                    <RadioButton android:id="@+id/layout3"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"/>
+
+                    <ImageButton android:id="@+id/ilayout3"
+                                 android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                 android:clickable="false"
+                                 android:src="@drawable/navigation3"/>
+                </RadioGroup>
+
+
+                <LinearLayout android:layout_height="wrap_content" android:orientation="horizontal"
+                              android:layout_width="fill_parent" android:gravity="left">
+
+
+                    <RadioGroup android:id="@+id/directionGroup" android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_gravity="left" android:gravity="center">
+
+                        <TextView android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content" android:id="@+id/navigation_title"
+                                  android:text="@string/navigation" android:textSize="22px"
+                                  android:layout_marginRight="5dp" android:layout_gravity="center_vertical" android:gravity="center"/>
+
+                            <universe.constellation.orion.viewer.android.RadioButton android:id="@+id/walkOrder_ABCD"
+                                         android:layout_width="wrap_content"
+                                         android:layout_height="wrap_content" orion:walkOrder="@string/ABCD"/>
+
+                            <TextView android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content" android:text="ABCD"/>
+
+                            <universe.constellation.orion.viewer.android.RadioButton android:id="@+id/walkOrder_ACBD"
+                                         android:layout_width="wrap_content"
+                                         android:layout_height="wrap_content" orion:walkOrder="@string/ACBD"/>
+
+                            <TextView android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content" android:text="ACBD"/>
+
+
+                            <universe.constellation.orion.viewer.android.RadioButton android:id="@+id/walkOrder_BADC"
+                                         android:layout_width="wrap_content"
+                                         android:layout_height="wrap_content" orion:walkOrder="@string/BADC"/>
+
+                            <TextView android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content" android:text="BADC"/>
+
+                            <universe.constellation.orion.viewer.android.RadioButton android:id="@+id/walkOrder_BDAC"
+                                         android:layout_width="wrap_content"
+                                         android:layout_height="wrap_content" orion:walkOrder="@string/BDAC"/>
+
+                            <TextView android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content" android:text="BDAC"/>
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+        <LinearLayout android:layout_height="wrap_content" android:orientation="horizontal"
+                      android:layout_width="fill_parent" android:gravity="right">
+            <ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content"
+                         android:src="@drawable/view" android:id="@+id/options_apply"
+                         android:layout_gravity="right"/>
+            <ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content"
+                         android:src="@drawable/revert" android:id="@+id/options_close"
+                         android:layout_gravity="right"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

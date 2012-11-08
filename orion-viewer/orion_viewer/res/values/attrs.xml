@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Orion Viewer - pdf, djvu, xps and cbz file viewer for android devices
+  ~
+  ~ Copyright (C) 2011-2012  Michael Bogdanov
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+
+    <attr name="actionId" format="reference" />
+
+    <attr name="minValue" format="integer" />
+
+    <attr name="maxValue" format="integer" />
+
+    <attr name="pattern" format="string" />
+
+    <attr name="isBook" format="boolean" />
+
+    <attr name="notEmpty" format="boolean" />
+
+    <attr name="justAndroidGeneral" format="boolean" />
+
+    <attr name="walkOrder" format="reference" />
+
+            <!--<p>Must be an integer value, such as "<code>100</code>".-->
+<!--<p>This may also be a reference to a resource (in the form-->
+<!--"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or-->
+<!--theme attribute (in the form-->
+<!--"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")-->
+<!--containing a value of this type.-->
+          <!--@attr name android:actionId-->
+        <!---->
+
+    <declare-styleable name="android.view.View">
+        <attr name="actionId" />
+    </declare-styleable>
+
+    <declare-styleable name="android.preference.ListPreference">
+        <attr name="justAndroidGeneral"/>
+    </declare-styleable>
+
+    <declare-styleable name="android.preference.CheckBoxPreference">
+        <attr name="justAndroidGeneral"/>
+    </declare-styleable>
+
+    <declare-styleable name="universe.constellation.orion.viewer.android.ImageButton">
+        <attr name="actionId"/>
+    </declare-styleable>
+
+    <declare-styleable name="universe.constellation.orion.viewer.prefs.OrionEditPreference">
+        <attr name="minValue"/>
+        <attr name="maxValue"/>
+        <attr name="notEmpty"/>
+        <attr name="pattern"/>
+        <attr name="isBook"/>
+    </declare-styleable>
+
+    <declare-styleable name="universe.constellation.orion.viewer.prefs.OrionListPreference">
+        <attr name="isBook"/>
+    </declare-styleable>
+
+    <declare-styleable name="universe.constellation.orion.viewer.android.RadioButton">
+        <attr name="walkOrder"/>
+    </declare-styleable>
+
+    <declare-styleable name="universe.constellation.orion.viewer.prefs.OrionLayoutDialog">
+        <attr name="isBook"/>
+    </declare-styleable>
+</resources>

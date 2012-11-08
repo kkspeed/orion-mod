@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Orion Viewer - pdf, djvu, xps and cbz file viewer for android devices
+  ~
+  ~ Copyright (C) 2011-2012  Michael Bogdanov
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<!--Author: Alexander-->
+
+<resources>
+    <!--Don not translate this section: start-->
+    <string name="app_name">Orion Viewer</string>
+    <string name="version_name">0.38.5</string>
+
+    <string name="ABCD">ABCD</string>
+    <string name="ACBD">ACBD</string>
+    <string name="BADC">BADC</string>
+    <string name="BDAC">BDAC</string>
+    <!--Don not translate this section: end-->
+
+
+
+    <string name="navigation">Page traversal</string>
+    <string name="crop_left">Left</string>
+    <string name="enable_even_crop">Another cropping for even pages</string>
+    <string name="crop_right">Right</string>
+    <string name="crop_top">Top</string>
+    <string name="crop_bottom">Bottom</string>
+    <string name="rotate_0">0 degree</string>
+    <string name="rotate_90">90 degree</string>
+    <string name="rotate_270">270 degree</string>
+    <string name="long_click">On long click</string>
+    <string name="short_click">On short click</string>
+    <string name="binding_click">On binding</string>
+
+
+    <string name="orientation_default">Default</string>
+    <string name="orientation_default_rotation">Application Default</string>
+    <string name="orientation_landscape">Landscape</string>
+    <string name="orientation_portrait">Portrait</string>
+    <string name="orientation_landscape_inverse">Landscape (270)</string>
+    <string name="orientation_portrait_inverse">Portrait (180)</string>
+
+
+    <string name="fit_width">Fit Width</string>
+    <string name="fit_height">Fit Height</string>
+    <string name="fit_page">Fit Page</string>
+    <string name="fit_custom">Custom...</string>
+
+    <string name="key_binder_message">Push any key and select action to bind them!</string>
+    <string name="key_binder_warning">Couldn\'t bind key with zero keycode, try another key!</string>
+    <string name="table_of_contents">Table of Contents</string>
+
+
+    <integer name="layout_right_bottom_outside">0</integer>
+    <integer name="layout_only_bottom_outside">1</integer>
+    <integer name="layout_always_inside">2</integer>
+
+
+    <string name="warn_no_text_in_selection">There is no text in selection!</string>
+    <string name="warn_no_outline">Outline is absent!</string>
+
+</resources>

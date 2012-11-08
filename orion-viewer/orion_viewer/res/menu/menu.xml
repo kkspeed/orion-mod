@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/add_bookmark_menu_item"
+          android:title="@string/menu_add_bookmark_item"
+          android:icon="@drawable/add_bookmark"/>
+
+    <item android:id="@+id/bookmarks_menu_item"
+      android:title="@string/menu_bookmarks_text"
+      android:icon="@drawable/bookmarks"/>
+
+    <item android:id="@+id/zoom_menu_item"
+      android:title="@string/menu_zoom_text"
+      android:icon="@drawable/zoom"/>
+
+
+    <item android:id="@+id/crop_menu_item"
+    android:title="@string/menu_crop_text"
+    android:icon="@drawable/crop"/>
+
+    <item android:id="@+id/select_text_menu_item"
+    android:title="@string/menu_select_text"
+    android:icon="@drawable/edit"/>
+
+    <!--<item android:id="@+id/rotation_menu_item"-->
+    <!--android:title="@string/menu_rotation_text"-->
+    <!--android:icon="@drawable/rotate"/>-->
+
+    <item android:id="@+id/book_options_menu_item"
+          android:title="@string/menu_book_preferences"
+          android:icon="@drawable/book_preferences"/>
+
+    <!--<item android:id="@+id/navigation_menu_item"-->
+          <!--android:title="@string/menu_navigation_text"-->
+          <!--android:icon="@drawable/navigation"/>-->
+
+    <item android:id="@+id/goto_menu_item"
+          android:title="@string/menu_goto_text"
+          android:icon="@drawable/next"/>
+
+
+    <!--<item android:id="@+id/keybinder_menu_item"-->
+          <!--android:title="@string/menu_key_binder_text"-->
+          <!--android:icon="@drawable/help"/>-->
+
+    <item android:id="@+id/outline_menu_item"
+          android:title="@string/menu_outline_text"
+          android:icon="@drawable/help"/>
+
+    <item android:id="@+id/open_menu_item"
+          android:title="@string/menu_open_text"
+          android:icon="@drawable/help"/>
+
+    <item android:id="@+id/open_dictionary_menu_item"
+          android:title="@string/menu_open_dictionary_text"
+          android:icon="@drawable/dictionary"/>
+
+    <item android:id="@+id/day_night_menu_item"
+          android:title="@string/menu_day_night_text"
+          android:icon="@drawable/day_night"/>
+
+    <item android:id="@+id/reflow_menu_item"
+          android:title="@string/menu_reflow_text"
+          android:icon="@drawable/day_night"/>
+
+    <!--<item android:id="@+id/tap_menu_item"-->
+          <!--android:title="@string/menu_tap_text"-->
+          <!--android:icon="@drawable/options"/>-->
+
+    <item android:id="@+id/options_menu_item"
+              android:title="@string/menu_options_text"
+              android:icon="@drawable/options"/>
+
+    <item android:id="@+id/help_menu_item"
+          android:title="@string/menu_help_text"
+          android:icon="@drawable/help"/>
+
+    <item android:id="@+id/exit_menu_item"
+          android:title="@string/menu_exit_text"
+          android:icon="@drawable/close"/>
+</menu>
