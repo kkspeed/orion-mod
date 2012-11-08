@@ -34,14 +34,14 @@ How to build
 
 Screenshots
 -----------
-* Reflow:
- - Chinese reflow over scanned PDF
+## Reflow: ##
+### Chinese reflow over scanned PDF ###
 
       ![Before Reflow](https://github.com/kkspeed/orion-mod/raw/master/img/chn_1.png)
 
       ![After Reflow](https://github.com/kkspeed/orion-mod/raw/master/img/chn_2.png) 
 
- - English reflow over text PDF
+### English reflow over text PDF ###
 
       ![Before Reflow](https://github.com/kkspeed/orion-mod/raw/master/img/eng_1.png)
 
