@@ -26,9 +26,14 @@ How to build
 ------------
 * Build the mupdf library
   cd mupdf-1.1-source/android  
-  ndk-build -j4
+  ndk-build
 
 * copy libmupdf.so, liblept.so, libtess.so to orion-viewer/orion_viewer/libs/armeabi/
 
 * In orion-viewer/orion_viewer, configure your sdk_dir and run ant debug
 
+Screenshots
+-----------
+* Reflow:
+  ![Before Reflow](https://github.com/kkspeed/orion-mod/raw/master/img/chn_1.png)\
+  ![After Reflow](https://github.com/kkspeed/orion-mod/raw/master/img/chn_2.png)\ 
