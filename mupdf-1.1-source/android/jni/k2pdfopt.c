@@ -532,7 +532,7 @@ static void k2pdfopt_reflow_bmp(MASTERINFO *masterinfo, WILLUSBITMAP *src)
 
 void k2pdfopt_set_params_lite(double zoom, int dpi) {
     zoom_value = zoom;
-    dst_dpi = 167;
+    dst_dpi = dpi;
 }
 
 void k2pdfopt_set_params(int bb_width, int bb_height, \
