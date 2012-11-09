@@ -1263,6 +1263,20 @@ public class OrionViewerActivity extends OrionBaseActivity {
                 }
             });
 
+        final SeekBar reflowQlSeek = (SeekBar)findMyViewById(R.id.reflow_quality_seeker);
+        reflowQlSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                    TextView seekQlDisplay = (TextView) findMyViewById(R.id.reflow_quality_display);
+                    seekQlDisplay.setText(String.format("%.2f", progress * 0.05));
+                }
+
+                public void onStartTrackingTouch(SeekBar seekBar) {
+                }
+
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                }
+            });
+
         ImageButton apply = (ImageButton) findMyViewById(R.id.reflow_apply);
         apply.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
@@ -1300,9 +1314,11 @@ public class OrionViewerActivity extends OrionBaseActivity {
 
                     TextView mg = (TextView) findMyViewById(R.id.reflow_margin_display);
                     TextView ws = (TextView) findMyViewById(R.id.reflow_word_space_display);
+                    TextView ql = (TextView) findMyViewById(R.id.reflow_quality_display);
 
                     float margin = Float.parseFloat(mg.getText().toString());
                     float word_space = Float.parseFloat(ws.getText().toString());
+                    float quality = Float.parseFloat(ql.getText().toString());
 
                     controller.setReflowParameters(zoom, dpi, columns, lastPageInfo.screenWidth,
                                                    lastPageInfo.screenHeight, m_top,
@@ -1312,7 +1328,8 @@ public class OrionViewerActivity extends OrionBaseActivity {
                                                    indent,
                                                    rotation,
                                                    margin,
-                                                   word_space);
+                                                   word_space,
+                                                   quality);
                     changeReflowMode();
 
                     controller.changeMargins(cropBorders[0], cropBorders[2], cropBorders[1],

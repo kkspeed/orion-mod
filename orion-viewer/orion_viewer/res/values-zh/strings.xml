@@ -56,6 +56,7 @@
     <string name="reflow_rotation">旋转</string>
     <string name="reflow_margin">边缘空白 </string>
     <string name="reflow_word_space">词间距 </string>
+    <string name="reflow_quality">画质</string>
 
     <string name="orientation_default">默认</string>
     <string name="orientation_default_rotation">应用程序默认</string>

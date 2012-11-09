@@ -56,6 +56,7 @@
     <string name="reflow_rotation">Rotate</string>
     <string name="reflow_margin">Margin </string>
     <string name="reflow_word_space">Word Space </string>
+    <string name="reflow_quality">Quality</string>
 
     <string name="orientation_default">Default</string>
     <string name="orientation_default_rotation">Application Default</string>

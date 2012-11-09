@@ -72,7 +72,8 @@ Java_com_artifex_mupdf_MuPDFCore_setReflowParameters(JNIEnv *env,
                                                      int indent,
                                                      int rotation,
                                                      float margin,
-                                                     float word_space)
+                                                     float word_space,
+                                                     float quality)
 {
     double m_l = m_left / 100.0 * pageWidth;
     double m_r = m_right / 100.0 * pageWidth;
@@ -104,7 +105,7 @@ Java_com_artifex_mupdf_MuPDFCore_setReflowParameters(JNIEnv *env,
 
     rf_context.zoom = zoom;
     rf_context.margin = margin;   /* This should be made an option! */
-    rf_context.quality = 1;
+    rf_context.quality = quality;
     rf_context.contrast = -1;
     rf_context.defect_size = 1.0;
     rf_context.line_spacing = -1.2;
@@ -117,9 +118,9 @@ Java_com_artifex_mupdf_MuPDFCore_setReflowParameters(JNIEnv *env,
 
     LOGE("========> zoom: %f, dpi: %d, columns: %d, width: %d, height: %d"
          "top: %f, bottom: %f, left: %f, right: %f, trim: %d, wrap: %d, indent: %d, rot: %d,"
-         "margin: %f, word_space: %f",
+         "margin: %f, word_space: %f, quality: %f",
          zoom, dpi, columns, bb_width, bb_height, m_t, m_b, m_l, m_r, default_trim,
-         wrap_text, indent, rotation, margin, word_space);
+         wrap_text, indent, rotation, margin, word_space, quality);
 
     /* k2pdfopt_set_params_lite(zoom, dpi, columns, bb_width, bb_height, */
     /*                          m_t, m_b, m_l, m_r); */

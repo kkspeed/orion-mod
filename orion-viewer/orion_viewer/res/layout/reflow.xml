@@ -131,4 +131,27 @@
                  android:layout_margin="5dp">
         </SeekBar>
     </LinearLayout>
+        <LinearLayout android:gravity="left"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content">
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textSize="25sp"
+                  android:gravity="left"
+                  android:text="@string/reflow_quality"/>
+        <TextView android:id="@+id/reflow_quality_display"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textSize="25sp"
+                  android:gravity="left"
+                  android:text="1.00"/>
+        <SeekBar android:id="@+id/reflow_quality_seeker"
+                 android:minWidth="100dp"
+                 android:layout_height="wrap_content"
+                 android:progress="20"
+                 android:max="20"
+                 android:layout_width="fill_parent"
+                 android:layout_margin="5dp">
+        </SeekBar>
+    </LinearLayout>
 </LinearLayout>
