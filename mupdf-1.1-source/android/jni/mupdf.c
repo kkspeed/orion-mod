@@ -66,17 +66,30 @@ Java_com_artifex_mupdf_MuPDFCore_setReflowParameters(JNIEnv *env,
                                                      int m_top,
                                                      int m_bottom,
                                                      int m_left,
-                                                     int m_right)
+                                                     int m_right,
+
+                                                     int default_trim,
+                                                     int wrap_text,
+                                                     int indent,
+                                                     int rotation)
 {
     double m_l = m_left / 100.0 * pageWidth;
     double m_r = m_right / 100.0 * pageWidth;
     double m_t = m_top / 100.0 * pageHeight;
     double m_b = m_bottom / 100.0 * pageHeight;
 
-    rf_context.trim = 0;        /* trim 0.25 inch? */
-    rf_context.wrap = 1;        /* Wrap text */
-    rf_context.indent = 1;      /* Indent? */
-    rf_context.rotate = 0;      /* Rotation */
+    rf_context.trim = 0;
+    if (default_trim) {
+        rf_context.trim = 1;        /* trim 0.25 inch? */
+        m_l = 0;
+        m_r = 0;
+        m_t = 0;
+        m_b = 0;
+    }
+
+    rf_context.wrap = wrap_text;        /* Wrap text */
+    rf_context.indent = indent;      /* Indent? */
+    rf_context.rotate = rotation;      /* Rotation */
     rf_context.columns = columns; /* Max columns */
 
     rf_context.offset_x = 0;    /* Not seem to be used */
@@ -102,8 +115,9 @@ Java_com_artifex_mupdf_MuPDFCore_setReflowParameters(JNIEnv *env,
     rf_context.bbox.y1 = (m_b > 0.1) ? (pageHeight - m_b - 1) : (pageHeight - 1);
 
     LOGE("========> zoom: %f, dpi: %d, columns: %d, width: %d, height: %d"
-         "top: %f, bottom: %f, left: %f, right: %f",
-         zoom, dpi, columns, bb_width, bb_height, m_t, m_b, m_l, m_r);
+         "top: %f, bottom: %f, left: %f, right: %f, trim: %d, wrap: %d, indent: %d, rot: %d",
+         zoom, dpi, columns, bb_width, bb_height, m_t, m_b, m_l, m_r, default_trim,
+         wrap_text, indent, rotation);
 
     /* k2pdfopt_set_params_lite(zoom, dpi, columns, bb_width, bb_height, */
     /*                          m_t, m_b, m_l, m_r); */

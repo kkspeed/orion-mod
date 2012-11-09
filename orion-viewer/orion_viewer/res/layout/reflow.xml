@@ -32,7 +32,37 @@
             android:text="2"
             android:numeric="integer"/>
     </LinearLayout>
-
+    <LinearLayout android:gravity="left"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content">
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textSize="25sp"
+                  android:gravity="left"
+                  android:text="@string/reflow_default_crop"/>
+        <CheckBox android:id="@+id/reflow_default_crop_box"
+                  android:checked="false"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textSize="25sp"
+                  android:gravity="left"
+                  android:text="@string/reflow_preserve_indent"/>
+        <CheckBox android:id="@+id/reflow_preserve_indent_box"
+                  android:checked="true"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textSize="25sp"
+                  android:gravity="left"
+                  android:text="@string/reflow_wrap_text"/>
+        <CheckBox android:id="@+id/reflow_wrap_text_box"
+                  android:checked="true"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"/>
+    </LinearLayout>
     <LinearLayout android:gravity="left"
                   android:layout_width="fill_parent"
                   android:layout_height="wrap_content">
@@ -49,11 +79,10 @@
                   android:layout_height="wrap_content"
                   android:textSize="25sp"
                   android:gravity="left"
-                  android:text="@string/reflow_dont_crop"/>
-        <CheckBox android:id="@+id/reflow_dont_crop_box"
-                  android:checked="false"
+                  android:text="@string/reflow_rotation"/>
+        <Spinner  android:id="@+id/reflow_rotation_spinner"
+                  android:entries="@array/orientation"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"/>
-
     </LinearLayout>
 </LinearLayout>

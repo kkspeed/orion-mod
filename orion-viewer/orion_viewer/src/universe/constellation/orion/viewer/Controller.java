@@ -317,9 +317,14 @@ public class Controller {
                              int m_top,
                              int m_bottom,
                              int m_left,
-                             int m_right) {
+                             int m_right,
+                             int default_trim,
+                             int wrap_text,
+                             int indent,
+                             int rotation) {
         doc.setReflowParameters(zoom, dpi, columns, bb_width, bb_height,
-                                m_top, m_bottom, m_left, m_right);
+                                m_top, m_bottom, m_left, m_right, default_trim,
+                                wrap_text, indent, rotation);
     }
 
     public void setReflow(int reflow) {

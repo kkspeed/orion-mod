@@ -105,5 +105,9 @@ public class MuPDFCore
                                            int m_top,
                                            int m_bottom,
                                            int m_left,
-                                           int m_right);
+                                           int m_right,
+                                           int default_trim,
+                                           int wrap_text,
+                                           int indent,
+                                           int rotation);
 }

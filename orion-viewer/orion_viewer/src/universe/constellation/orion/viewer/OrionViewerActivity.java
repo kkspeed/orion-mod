@@ -267,8 +267,8 @@ public class OrionViewerActivity extends OrionBaseActivity {
 
             controller = new Controller(this, doc, str, view);
 
-            controller.setReflowParameters(1, 167, 2, lastPageInfo.screenWidth, lastPageInfo.screenHeight,
-                                           -1, -1, -1, -1);
+//            controller.setReflowParameters(1, 167, 2, lastPageInfo.screenWidth, lastPageInfo.screenHeight,
+//                                           -1, -1, -1, -1);
 
             controller.changeOrinatation(lastPageInfo.screenOrientation);
 
@@ -1247,10 +1247,11 @@ public class OrionViewerActivity extends OrionBaseActivity {
 
                     int[] m = new int[6];
                     controller.getMargins(m);
-                    int m_left = (m[0] == 0) ? -1 :  m[0];
-                    int m_right = (m[1] == 0) ? -1 : m[1];
-                    int m_top = (m[2] == 0) ? -1 : m[2];
-                    int m_bottom = (m[3] == 0) ? -1 : m[3];
+
+                    int m_left = m[0];
+                    int m_right = m[1];
+                    int m_top = m[2];
+                    int m_bottom = m[3];
 
                     cropBorders[0] = 0;
                     cropBorders[1] = 0;
@@ -1259,17 +1260,23 @@ public class OrionViewerActivity extends OrionBaseActivity {
                     cropBorders[4] = 0;
                     cropBorders[5] = 0;
 
-                    CheckBox cb = (CheckBox) findMyViewById(R.id.reflow_dont_crop_box);
+                    CheckBox cb = (CheckBox) findMyViewById(R.id.reflow_default_crop_box);
+                    int default_trim = (cb.isChecked()) ? 1 : 0;
+                    cb = (CheckBox) findMyViewById(R.id.reflow_preserve_indent_box);
+                    int indent = (cb.isChecked()) ? 1 : 0;
+                    cb = (CheckBox) findMyViewById(R.id.reflow_wrap_text_box);
+                    int wrap_text = (cb.isChecked()) ? 1 : 0;
 
-                    if (cb.isChecked()) {
-                        m_left = m_right = m_top = m_bottom = 0;
-                    }
-
-                    Common.d("Spinner: zoom: " + zoom + " dpi: " + dpi + " columns: " + columns);
+                    Spinner sp_rot = (Spinner) findMyViewById(R.id.reflow_rotation_spinner);
+                    int rotation = Integer.parseInt(sp_rot.getSelectedItem().toString());
 
                     controller.setReflowParameters(zoom, dpi, columns, lastPageInfo.screenWidth,
                                                    lastPageInfo.screenHeight, m_top,
-                                                   m_bottom, m_left, m_right);
+                                                   m_bottom, m_left, m_right,
+                                                   default_trim,
+                                                   wrap_text,
+                                                   indent,
+                                                   rotation);
                     changeReflowMode();
 
                     controller.changeMargins(cropBorders[0], cropBorders[2], cropBorders[1],
