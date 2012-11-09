@@ -62,7 +62,9 @@ public interface DocumentWrapper {
                              int default_trim,
                              int wrap_text,
                              int indent,
-                             int rotation);
+                             int rotation,
+                             float margin,
+                             float word_space);
 
 	public OutlineItem[] getOutline();
 }

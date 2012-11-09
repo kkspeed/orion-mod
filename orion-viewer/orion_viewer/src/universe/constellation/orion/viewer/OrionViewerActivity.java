@@ -1235,6 +1235,34 @@ public class OrionViewerActivity extends OrionBaseActivity {
     }
 
     void initReflowScreen() {
+        final SeekBar reflowSeek = (SeekBar)findMyViewById(R.id.reflow_margin_seeker);
+        reflowSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                    TextView seekDisplay = (TextView) findMyViewById(R.id.reflow_margin_display);
+                    seekDisplay.setText(String.format("%.2f", progress * 0.02));
+                }
+
+                public void onStartTrackingTouch(SeekBar seekBar) {
+                }
+
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                }
+            });
+
+        final SeekBar reflowWsSeek = (SeekBar)findMyViewById(R.id.reflow_word_space_seeker);
+        reflowWsSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                    TextView seekWsDisplay = (TextView) findMyViewById(R.id.reflow_word_space_display);
+                    seekWsDisplay.setText(String.format("%.2f", progress * 0.05));
+                }
+
+                public void onStartTrackingTouch(SeekBar seekBar) {
+                }
+
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                }
+            });
+
         ImageButton apply = (ImageButton) findMyViewById(R.id.reflow_apply);
         apply.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
@@ -1270,13 +1298,21 @@ public class OrionViewerActivity extends OrionBaseActivity {
                     Spinner sp_rot = (Spinner) findMyViewById(R.id.reflow_rotation_spinner);
                     int rotation = Integer.parseInt(sp_rot.getSelectedItem().toString());
 
+                    TextView mg = (TextView) findMyViewById(R.id.reflow_margin_display);
+                    TextView ws = (TextView) findMyViewById(R.id.reflow_word_space_display);
+
+                    float margin = Float.parseFloat(mg.getText().toString());
+                    float word_space = Float.parseFloat(ws.getText().toString());
+
                     controller.setReflowParameters(zoom, dpi, columns, lastPageInfo.screenWidth,
                                                    lastPageInfo.screenHeight, m_top,
                                                    m_bottom, m_left, m_right,
                                                    default_trim,
                                                    wrap_text,
                                                    indent,
-                                                   rotation);
+                                                   rotation,
+                                                   margin,
+                                                   word_space);
                     changeReflowMode();
 
                     controller.changeMargins(cropBorders[0], cropBorders[2], cropBorders[1],

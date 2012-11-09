@@ -321,10 +321,12 @@ public class Controller {
                              int default_trim,
                              int wrap_text,
                              int indent,
-                             int rotation) {
+                             int rotation,
+                             float margin,
+                             float word_space) {
         doc.setReflowParameters(zoom, dpi, columns, bb_width, bb_height,
                                 m_top, m_bottom, m_left, m_right, default_trim,
-                                wrap_text, indent, rotation);
+                                wrap_text, indent, rotation, margin, word_space);
     }
 
     public void setReflow(int reflow) {

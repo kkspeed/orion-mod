@@ -54,6 +54,8 @@
     <string name="reflow_preserve_indent">保留缩进</string>
     <string name="reflow_wrap_text">自动折行</string>
     <string name="reflow_rotation">旋转</string>
+    <string name="reflow_margin">边缘空白 </string>
+    <string name="reflow_word_space">词间距 </string>
 
     <string name="orientation_default">默认</string>
     <string name="orientation_default_rotation">应用程序默认</string>
