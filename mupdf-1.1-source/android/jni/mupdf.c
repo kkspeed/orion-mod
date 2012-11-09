@@ -45,6 +45,7 @@ fz_bbox *hit_bbox = NULL;
 int rf_width, rf_height;        /* Reflowed page width, height */
 int rf_enabled = 0;             /* Is reflow enabled */
 int rf_lastPage = -1;
+KOPTContext rf_context;
 
 JNIEXPORT void
 JNICALL Java_com_artifex_mupdf_MuPDFCore_setReflow(JNIEnv * env, jobject thiz,
@@ -72,12 +73,40 @@ Java_com_artifex_mupdf_MuPDFCore_setReflowParameters(JNIEnv *env,
     double m_t = m_top / 100.0 * pageHeight;
     double m_b = m_bottom / 100.0 * pageHeight;
 
+    rf_context.trim = 0;        /* trim 0.25 inch? */
+    rf_context.wrap = 1;        /* Wrap text */
+    rf_context.indent = 1;      /* Indent? */
+    rf_context.rotate = 0;      /* Rotation */
+    rf_context.columns = columns; /* Max columns */
+
+    rf_context.offset_x = 0;    /* Not seem to be used */
+    rf_context.offset_y = 0;    /* Not seem to be used */
+
+    rf_context.dev_width = bb_width;
+    rf_context.dev_height = bb_height;
+
+    rf_context.straighten = 0;  /* Straighten */
+    rf_context.justification = -1; /* Default justification */
+
+    rf_context.zoom = zoom;
+    rf_context.margin = 0.06;   /* This should be made an option! */
+    rf_context.quality = 1;
+    rf_context.contrast = -1;
+    rf_context.defect_size = 1.0;
+    rf_context.line_spacing = -1.2;
+    rf_context.word_spacing = 0.375;
+
+    rf_context.bbox.x0 = (m_l > 0.1) ? m_l : 0;
+    rf_context.bbox.y0 = (m_t > 0.1) ? m_t : 0;
+    rf_context.bbox.x1 = (m_r > 0.1) ? (pageWidth - m_r - 1) : (pageWidth - 1);
+    rf_context.bbox.y1 = (m_b > 0.1) ? (pageHeight - m_b - 1) : (pageHeight - 1);
+
     LOGE("========> zoom: %f, dpi: %d, columns: %d, width: %d, height: %d"
          "top: %f, bottom: %f, left: %f, right: %f",
          zoom, dpi, columns, bb_width, bb_height, m_t, m_b, m_l, m_r);
 
-    k2pdfopt_set_params_lite(zoom, dpi, columns, bb_width, bb_height,
-                             m_t, m_b, m_l, m_r);
+    /* k2pdfopt_set_params_lite(zoom, dpi, columns, bb_width, bb_height, */
+    /*                          m_t, m_b, m_l, m_r); */
 }
 
 JNIEXPORT int JNICALL
@@ -199,8 +228,10 @@ Java_com_artifex_mupdf_MuPDFCore_gotoPageInternal(JNIEnv *env, jobject thiz, int
 
         /* When Reflow enabled, reflow the page and get different size */
         if (rf_enabled && (rf_lastPage != page)) {
-            k2pdfopt_mupdf_reflow(doc, currentPage, ctx);
-            k2pdfopt_rfbmp_size(&rf_width, &rf_height);
+            k2pdfopt_mupdf_reflow(&rf_context, doc, currentPage, ctx);
+            rf_width = rf_context.page_width;
+            rf_height = rf_context.page_height;
+//            k2pdfopt_rfbmp_size(&rf_width, &rf_height);
             rf_lastPage = page;
         }
 
@@ -297,8 +328,7 @@ Java_com_artifex_mupdf_MuPDFCore_getPageHeight(JNIEnv *env, jobject thiz)
 void drawReflowedPage(unsigned char* buf, int pageW, int pageH,
                       int patchX, int patchY, int patchW, int patchH)
 {
-    uint8_t *pmptr = NULL;
-    k2pdfopt_rfbmp_ptr(&pmptr);
+    uint8_t *pmptr = rf_context.data;
 
     pmptr += (patchY * patchW) + patchX;
 
