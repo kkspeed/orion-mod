@@ -22,9 +22,14 @@ Current tweaks
 
 * Minor fixes in key binding activity and light themes on Nook Simple Touch
 
+* Adapt k2pdfopt to orion-viewer's cropping capability, now able to crop pages before
+  reflow, thanks to libk2pdfopt, a refinement to the original k2pdfopt:
+
+  https://github.com/chrox/libk2pdfopt
+
 Notes
 -------------
-* Make sure the page settings(zoom, crops etc) are reset to default and the screen is
+* Make sure the page settings(zoom etc) are reset to default and the screen is
   in portrait mode before you start the reflow. Possibly landscape mode will be support
   in the future.
 
