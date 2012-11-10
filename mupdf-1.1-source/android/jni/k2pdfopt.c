@@ -6606,7 +6606,7 @@ static void bmp_more_rows(WILLUSBITMAP *bmp, double ratio, int pixval)
      */
 	if (new_height <= bmp->height) {
         if (bmp->height == 0)
-            new_height = 1;
+            new_height = 2;
         else
             return;
     }
