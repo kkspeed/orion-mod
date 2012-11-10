@@ -41,6 +41,8 @@
 
 #define HAVE_MUPDF
 
+//#define K2DEBUG
+
 #define VERSION "v1.60"
 #define GRAYLEVEL(r,g,b) ((int)(((r)*0.3+(g)*0.59+(b)*0.11)*1.002))
 #if (defined(WIN32) || defined(WIN64))
@@ -1710,9 +1712,9 @@ static void bmpregion_vertically_break(BMPREGION *region,
 	BMPREGION *bregion, _bregion;
 	BREAKINFO *breakinfo, _breakinfo;
 	double region_width_inches, region_height_inches;
-
+#ifdef K2DEBUG
     __android_log_print(ANDROID_LOG_INFO, "K2OPT>>> ", "In Vertically BREAK");
-
+#endif
 #if (WILLUSDEBUGX & 1)
 	printf("\n\n@bmpregion_vertically_break.  colgap_pixels=%d\n\n",colgap_pixels);
 	printf("    region = (%d,%d) - (%d,%d)\n",region->c1,region->r1,region->c2,region->r2);
@@ -1726,7 +1728,9 @@ static void bmpregion_vertically_break(BMPREGION *region,
 	breakinfo_alloc(102, breakinfo, region->r2 - region->r1 + 1);
 	bmpregion_find_vertical_breaks(region, breakinfo, colcount, rowcount, -1.0);
 
+#ifdef K2DEBUG
     __android_log_print(ANDROID_LOG_INFO, "K2OPT>>> ", "After find Vertically BREAKS");
+#endif
 	/* Should there be a check for breakinfo->n==0 here? */
 	/* Don't think it breaks anything to let it go.  -- 6-11-12 */
 #if (WILLUSDEBUGX & 2)
@@ -1761,8 +1765,10 @@ static void bmpregion_vertically_break(BMPREGION *region,
 	/*
 	 ** Tag blank rows and columns
 	 */
+#ifdef K2DEBUG
     __android_log_print(ANDROID_LOG_INFO, "K2OPT>>> ", "vertial_break_threshold: %f, break_info n: %d",
                         vertical_break_threshold, breakinfo->n);
+#endif
 
 	if (vertical_break_threshold < 0. || breakinfo->n < 6)
 		biggap = -1.;
@@ -1803,18 +1809,23 @@ static void bmpregion_vertically_break(BMPREGION *region,
 	 region_width_inches / max_region_width_inches,
 	 region_height_inches);
 	 */
+#ifdef K2DEBUG
     __android_log_print(ANDROID_LOG_INFO, "K2OPT>>> ", "region width inch: %f, region heigh inch: %f",
                         region_width_inches, region_height_inches);
+#endif
 	if (force_scale < -1.5 && region_width_inches > MIN_REGION_WIDTH_INCHES
 			&& region_width_inches / max_region_width_inches < 1.25
 			&& region_height_inches > 0.5) {
 		revert = 1;
 		force_scale = -1.0;
+#ifdef K2DEBUG
         __android_log_print(ANDROID_LOG_INFO, "K2OPT>>> ", "begin fit: force_scale: %f",
                             force_scale);
+#endif
 		fit_column_to_screen(region_width_inches);
-
+#ifdef K2DEBUG
         __android_log_print(ANDROID_LOG_INFO, "K2OPT>>> ", "begin fit: force_scale done");
+#endif
 
 		// trim_left_and_right = 0;
 		allow_text_wrapping = 0;
@@ -1835,21 +1846,26 @@ static void bmpregion_vertically_break(BMPREGION *region,
 	caller_id = 1;
 	trim_flags = src_trim ? 0xf : 0x80;
 
+#ifdef K2DEBUG
     __android_log_print(ANDROID_LOG_INFO, "K2OPT>>> ", "Before for loop: %d",
                         breakinfo->n);
+#endif
 
 	for (regcount = i1 = i = 0; i1 < breakinfo->n; i++) {
 		int i2;
-
+#ifdef K2DEBUG
         __android_log_print(ANDROID_LOG_INFO, "K2OPT>>> ", "For variables:  i1: %d"
                             "regcount: %d, i: %d", i1, regcount, i);
+#endif
 
 		i2 = i < breakinfo->n ? i : breakinfo->n - 1;
 		if (i >= breakinfo->n
 				|| (biggap > 0. && breakinfo->textrow[i2].gap >= biggap)) {
 			int j, c1, c2, nc, nowrap;
 			double regwidth, ar1, rh1;
+#ifdef K2DEBUG
             __android_log_print(ANDROID_LOG_INFO, "K2OPT>>> ", "IF TRUE");
+#endif
 // printf("CALLER 1:  i1=%d, i2=%d (breakinfo->n=%d)\n",i1,i2,breakinfo->n);
 			(*bregion) = (*region);
 			bregion->r1 = breakinfo->textrow[i1].r1;
@@ -1874,7 +1890,9 @@ static void bmpregion_vertically_break(BMPREGION *region,
 					| (i2 == breakinfo->n - 1 ? 0 : 2);
 			/* Green */
 			mark_source_page(bregion, 3, marking_flags);
+#ifdef K2DEBUG
             __android_log_print(ANDROID_LOG_INFO, "K2OPT>>> ", "IF TRUE -> mark_source_page_done");
+#endif
 			nowrap = ((regwidth <= max_region_width_inches
 					&& allow_text_wrapping < 2)
 					|| (ar1 > no_wrap_ar_limit
@@ -1909,29 +1927,38 @@ static void bmpregion_vertically_break(BMPREGION *region,
 				}
 				dst_add_gap_src_pixels("Vert break", masterinfo, gap);
 			} else {
+#ifdef K2DEBUG
                 __android_log_print(ANDROID_LOG_INFO, "K2OPT>>> ", "IF FALSE");
+#endif
 				if (regcount == 0 && beginning_gap_internal < 0)
 					beginning_gap_internal = colgap_pixels;
 			}
+#ifdef K2DEBUG
             __android_log_print(ANDROID_LOG_INFO, "K2OPT>>> ", "REGION ADD: ");
+#endif
 			bmpregion_add(bregion, breakinfo, masterinfo, allow_text_wrapping,
 					trim_flags, allow_vertical_breaks, force_scale,
 					justification_flags, caller_id, colcount, rowcount,
 					pageinfo, marking_flags, rbdelta);
+#ifdef K2DEBUG
             __android_log_print(ANDROID_LOG_INFO, "K2OPT>>> ", "REGION ADD DONE ");
+#endif
 			regcount++;
 			i1 = i2 + 1;
 		}
 	}
-
+#ifdef K2DEBUG
     __android_log_print(ANDROID_LOG_INFO, "K2OPT>>> ", "Leave For Loop");
+#endif
 
 	ncols_last = ncols;
 	if (revert)
 		restore_output_dpi();
 	breakinfo_free(102, breakinfo);
 
+#ifdef K2DEBUG
     __android_log_print(ANDROID_LOG_INFO, "K2OPT>>> ", "Leave BREAK");
+#endif
 }
 
 /*
@@ -2021,9 +2048,13 @@ static void bmpregion_add(BMPREGION *region, BREAKINFO *breakinfo,
 	 ** trimflags = 0xc for just top and bottom margins.
 	 */
 
+#ifdef K2DEBUG
     __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "BEFORE TRIM REGION");
+#endif
 	bmpregion_trim_margins(newregion, colcount, rowcount, trim_flags);
+#ifdef K2DEBUG
     __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "AFTER TRIM REGION");
+#endif
 
 #if (WILLUSDEBUGX & 1)
 	printf("    After trim:  (%d,%d) - (%d,%d)\n",newregion->c1,newregion->r1,newregion->c2,newregion->r2);
@@ -2077,7 +2108,9 @@ static void bmpregion_add(BMPREGION *region, BREAKINFO *breakinfo,
 #endif
 		region_width_inches = (double) nc / src_dpi;
 	}
+#ifdef K2DEBUG
     __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "BEFORE ANALYZE");
+#endif
 	/*
 	 ** Try breaking the region into smaller horizontal pieces (wrap text lines)
 	 */
@@ -2092,10 +2125,14 @@ static void bmpregion_add(BMPREGION *region, BREAKINFO *breakinfo,
 	if (allow_text_wrapping == 2
 			|| (allow_text_wrapping == 1
 					&& region_width_inches > max_region_width_inches)) {
+#ifdef K2DEBUG
         __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "BEFORE ANALYZE");
+#endif
 		bmpregion_analyze_justification_and_line_spacing(newregion, breakinfo,
 				masterinfo, colcount, rowcount, pageinfo, 1, force_scale);
+#ifdef K2DEBUG
         __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "END ANALYZE");
+#endif
 		return;
 	}
 
@@ -2103,10 +2140,14 @@ static void bmpregion_add(BMPREGION *region, BREAKINFO *breakinfo,
 	 ** If allowed, re-submit each vertical region individually
 	 */
 	if (allow_vertical_breaks) {
+#ifdef K2DEBUG
         __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "AGAIN LINE ANALYZE");
+#endif
 		bmpregion_analyze_justification_and_line_spacing(newregion, breakinfo,
 				masterinfo, colcount, rowcount, pageinfo, 0, force_scale);
+#ifdef K2DEBUG
         __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "AGAIN LINE ANALYZE DONE");
+#endif
 		return;
 	}
 
@@ -2345,7 +2386,16 @@ static void dst_add_gap_src_pixels(char *caller, MASTERINFO *masterinfo,
 	gap_inches *= vertical_multiplier;
 	if (gap_inches > max_vertical_gap_inches)
 		gap_inches = max_vertical_gap_inches;
+
+#ifdef K2DEBUG
+    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "gap_inches: %f", gap_inches);
+#endif
+
 	dst_add_gap(masterinfo, gap_inches);
+
+#ifdef K2DEBUG
+    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "add done gap_inches: %f", gap_inches);
+#endif
 }
 
 static void dst_add_gap(MASTERINFO *masterinfo, double inches)
@@ -2357,8 +2407,22 @@ static void dst_add_gap(MASTERINFO *masterinfo, double inches)
 	n = (int) (inches * dst_dpi + .5);
 	if (n < 1)
 		n = 1;
-	while (masterinfo->rows + n > masterinfo->bmp.height)
+#ifdef K2DEBUG
+    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "dst_add_gap:while: n: %d", n);
+#endif
+
+	while (masterinfo->rows + n > masterinfo->bmp.height) {
+#ifdef K2DEBUG
+        __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "dst_add_gap, while loop: %d, height: %d",
+                            masterinfo->rows + n, masterinfo->bmp.height);
+#endif
 		bmp_more_rows(&masterinfo->bmp, 1.4, 255);
+    }
+
+#ifdef K2DEBUG
+    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "dst_add_gap end while");
+#endif
+
 	bw = bmp_bytewidth(&masterinfo->bmp) * n;
 	p = bmp_rowptr_from_top(&masterinfo->bmp, masterinfo->rows);
 	memset(p, 255, bw);
@@ -3248,7 +3312,9 @@ static void bmpregion_analyze_justification_and_line_spacing(BMPREGION *region,
 			break;
 	}
 
+#ifdef K2DEBUG
     __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "analyze: first row: %d", i);
+#endif
 
 	if (i >= breakinfo->n)
 		return;
@@ -3260,7 +3326,9 @@ static void bmpregion_analyze_justification_and_line_spacing(BMPREGION *region,
 		if ((textrow->r1 + textrow->r2) / 2 > region->r2)
 			break;
 	}
+#ifdef K2DEBUG
     __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "analyze: last row: %d", i);
+#endif
 	i2 = i - 1;
 	if (i2 < i1)
 		return;
@@ -3287,7 +3355,9 @@ static void bmpregion_analyze_justification_and_line_spacing(BMPREGION *region,
 	capheight = lcheight = 0.;
 	maxgap = -1;
 
+#ifdef    K2DEBUG
     __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "analyze: before for");
+#endif
 	for (nch = nls = 0, i = i1; i <= i2; i++) {
 		TEXTROW *textrow;
 		double ar, rh;
@@ -3331,7 +3401,9 @@ static void bmpregion_analyze_justification_and_line_spacing(BMPREGION *region,
 		printf("   Row %2d: (%4d,%4d) - (%4d,%4d) rowbase=%4d, lch=%d, h5050=%d, rh=%d\n",i-i1+1,textrow->c1,textrow->r1,textrow->c2,textrow->r2,textrow->rowbase,textrow->lcheight,textrow->h5050,textrow->rowheight);
 #endif
 	}
+#ifdef K2DEBUG
     __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "analyze: after for");
+#endif
 
 	wrapbmp_set_maxgap(maxgap);
 	if (nch < 1)
@@ -3341,9 +3413,13 @@ static void bmpregion_analyze_justification_and_line_spacing(BMPREGION *region,
 		lcheight = median_val(lch, nch);
 	}
 // printf("capheight = %g, lcheight = %g\n",capheight,lcheight);
+#ifdef K2DEBUG
     __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "before: is_centered");
+#endif
 	bmpregion_is_centered(region, breakinfo, i1, i2, &textheight);
+#ifdef K2DEBUG
     __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "after: is_centered");
+#endif
 	/*
 	 ** For 12 pt font:
 	 **     Single spacing is 14.66 pts (Calibri), 13.82 pts (Times), 13.81 pts (Arial)
@@ -3354,7 +3430,9 @@ static void bmpregion_analyze_justification_and_line_spacing(BMPREGION *region,
 	 ** Mean small letter height = 0.49
 	 */
 	fontsize = (capheight + lcheight) / 1.17;
+#ifdef K2DEBUG
     __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "fontsize: %f", fontsize);
+#endif
 // printf("font size = %g pts.\n",(fontsize/src_dpi)*72.);
 	/*
 	 ** Set line spacing for this region
@@ -3385,8 +3463,9 @@ static void bmpregion_analyze_justification_and_line_spacing(BMPREGION *region,
 	mingap = mean_row_gap / 4;
 	if (mingap < 1)
 		mingap = 1;
-
+#ifdef K2DEBUG
     __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "ntr: %d", ntr);
+#endif
 	/* Try to figure out if we have a ragged right edge */
 	if (ntr < 3)
 		ragged_right = 1;
@@ -3438,7 +3517,9 @@ static void bmpregion_analyze_justification_and_line_spacing(BMPREGION *region,
 #endif
 
 	/* Store justification and other info line by line */
+#ifdef K2DEBUG
     __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "for loop again: %d -> %d", i1, i2);
+#endif
 
 	for (i = i1; i <= i2; i++) {
 		double indent1, del;
@@ -3522,7 +3603,9 @@ static void bmpregion_analyze_justification_and_line_spacing(BMPREGION *region,
 		 just[i-i1] = (just[i-i1]&0xf)|0x60;
 		 */
 	}
+#ifdef K2DEBUG
     __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "end forloop again");
+#endif
 	/*
 	 {
 	 double mean1,mean2,stdev1,stdev2;
@@ -3540,9 +3623,13 @@ static void bmpregion_analyze_justification_and_line_spacing(BMPREGION *region,
 	/*
 	 ** Process row by row
 	 */
+#ifdef K2DEBUG
     __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "begin to process row by row");
+#endif
 	for (i = i1; i <= i2; i++) {
+#ifdef K2DEBUG
         __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "chainsing loop: %d", i);
+#endif
 
 		TEXTROW *textrow;
 		int justflags, trimflags, centered, marking_flags, gap;
@@ -3557,15 +3644,21 @@ static void bmpregion_analyze_justification_and_line_spacing(BMPREGION *region,
 #if (WILLUSDEBUGX & 1)
 		printf("Row %2d:  r1=%4d, r2=%4d, linespacing=%3d\n",i,textrow->r1,textrow->r2,line_spacing);
 #endif
+#ifdef K2DEBUG
         __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "landmark1");
+#endif
 		/* The |3 tells it to use the user settings for left/right/center */
 		justflags = just[i - i1] | 0x3;
 		centered = ((justflags & 0xc) == 4);
+#ifdef K2DEBUG
         __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "landmark2");
+#endif
 #if (WILLUSDEBUGX & 1)
 		printf("    justflags[%d]=0x%2X, centered=%d, indented=%d\n",i-i1,justflags,centered,indented[i-i1]);
 #endif
+#ifdef K2DEBUG
         __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "landmark3: allow_text_wrapping: %d", allow_text_wrapping);
+#endif
 		if (allow_text_wrapping) {
 			/* If this line is indented or if the justification has changed, */
 			/* then start a new line.                                        */
@@ -3575,20 +3668,28 @@ static void bmpregion_analyze_justification_and_line_spacing(BMPREGION *region,
 #ifdef WILLUSDEBUG
 				printf("wrapflush4\n");
 #endif
+#ifdef K2DEBUG
                 __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "before flush <-<-<-");
+#endif
 				wrapbmp_flush(masterinfo, 0, pageinfo, 1);
+#ifdef K2DEBUG
                 __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "after flush <-<-<-");
+#endif
 			}
 #ifdef WILLUSDEBUG
 			printf("    c1=%d, c2=%d\n",newregion->c1,newregion->c2);
 #endif
 			marking_flags = 0xc | (i == i1 ? 0 : 1) | (i == i2 ? 0 : 2);
+#ifdef K2DEBUG
             __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "before one row wrap region");
+#endif
 			bmpregion_one_row_wrap_and_add(newregion, breakinfo, i, i1, i2,
 					masterinfo, justflags, colcount, rowcount, pageinfo,
 					line_spacing, mean_row_gap, textrow->rowbase, marking_flags,
 					indented[i - i1]);
+#ifdef K2DEBUG
             __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "after one row wrap region");
+#endif
 			if (centered || short_line[i - i1]) {
 #ifdef WILLUSDEBUG
 				printf("wrapflush5\n");
@@ -3597,16 +3698,23 @@ static void bmpregion_analyze_justification_and_line_spacing(BMPREGION *region,
 			}
 			continue;
 		}
+#ifdef K2DEBUG
         __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "after if: allow_text_wrapping");
+#endif
+
 #ifdef WILLUSDEBUG
 		printf("wrapflush5a\n");
 #endif
 
 		/* No wrapping allowed:  process whole line as one region */
+#ifdef K2DEBUG
         __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "before flush");
+#endif
 		wrapbmp_flush(masterinfo, 0, pageinfo, 1);
 
+#ifdef K2DEBUG
         __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "after flush");
+#endif
 
 		/* If default justifications, ignore all analysis and just center it. */
 		if (dst_justify < 0 && dst_fulljustify < 0) {
@@ -3617,11 +3725,15 @@ static void bmpregion_analyze_justification_and_line_spacing(BMPREGION *region,
 		} else
 			trimflags = 0;
 		/* No wrapping:  text wrap, trim flags, vert breaks, fscale, just */
+#ifdef K2DEBUG
         __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "Before region add --->");
+#endif
 		bmpregion_add(newregion, breakinfo, masterinfo, 0, trimflags, 0,
 				force_scale, justflags, 5, colcount, rowcount, pageinfo, 0,
 				textrow->r2 - textrow->rowbase);
+#ifdef K2DEBUG
         __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "After region add --->");
+#endif
 		/* Compute line spacing between rows */
 		{
 			int thisgap, gap_allowed;
@@ -5017,38 +5129,34 @@ static void wrapbmp_flush(MASTERINFO *masterinfo, int allow_full_justification,
 	int *colcount, *rowcount;
 	static char *funcname = "wrapbmp_flush";
 // char filename[256];
+#ifdef K2DEBUG
+	__android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "@wrapbmp_flush(IN)");
+#endif
 
 	if (wrapbmp->width <= 0) {
+
+#ifdef K2DEBUG
+        __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "before_add_src_pixels");
+#endif
+
 		if (use_bgi == 1 && beginning_gap_internal > 0)
 			dst_add_gap_src_pixels("wrapbmp_bgi0", masterinfo,
 					beginning_gap_internal);
+
+#ifdef K2DEBUG
+        __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "after_add_src_pixels");
+#endif
 		beginning_gap_internal = -1;
 		last_h5050_internal = -1;
 		if (use_bgi)
 			just_flushed_internal = 1;
 		return;
 	}
-#ifdef WILLUSDEBUG
-	printf("@wrapbmp_flush()\n");
+
+#ifdef K2DEBUG
+	__android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "@wrapbmp_flush()");
 #endif
-	/*
-	 {
-	 char filename[256];
-	 int i;
-	 static int bcount=0;
-	 for (i=0;i<wrapbmp->height;i++)
-	 {
-	 unsigned char *p;
-	 int j;
-	 p=bmp_rowptr_from_top(wrapbmp,i);
-	 for (j=0;j<wrapbmp->width;j++)
-	 if (p[j]>240)
-	 p[j]=192;
-	 }
-	 sprintf(filename,"out%05d.png",bcount++);
-	 bmp_write(wrapbmp,filename,stdout,100);
-	 }
-	 */
+
 	colcount = rowcount = NULL;
 	willus_dmem_alloc_warn(19, (void **) &colcount,
 			(wrapbmp->width + 16) * sizeof(int), funcname, 10);
@@ -5065,8 +5173,12 @@ static void wrapbmp_flush(MASTERINFO *masterinfo, int allow_full_justification,
 	printf("Bitmap is %d x %d (baseline=%d)\n",wrapbmp->width,wrapbmp->height,wrapbmp_base);
 #endif
 
+
 	/* Sanity check on row spacing -- don't let it be too large. */
 	nomss = wrapbmp_rhmax * 1.7; /* Nominal single-spaced height for this row */
+#ifdef K2DEBUG
+    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "last_row_base: %f ", last_rowbase_internal);
+#endif
 	if (last_rowbase_internal < 0)
 		dh = 0;
 	else {
@@ -5083,6 +5195,11 @@ static void wrapbmp_flush(MASTERINFO *masterinfo, int allow_full_justification,
 				dh = dh1;
 		}
 	}
+
+#ifdef K2DEBUG
+    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "dh: %d", last_rowbase_internal);
+#endif
+
 	if (dh > 0) {
 #ifdef WILLUSDEBUG
 		aprintf(ANSI_YELLOW "dh > 0 = %d" ANSI_NORMAL "\n",dh);
@@ -5102,6 +5219,11 @@ static void wrapbmp_flush(MASTERINFO *masterinfo, int allow_full_justification,
 		 }
 		 */
 	}
+
+#ifdef K2DEBUG
+    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "bpp: %d", wrapbmp->bpp);
+#endif
+
 	if (wrapbmp->bpp == 24) {
 		bmp8 = &_bmp8;
 		bmp_init(bmp8);
@@ -5109,6 +5231,12 @@ static void wrapbmp_flush(MASTERINFO *masterinfo, int allow_full_justification,
 		region.bmp8 = bmp8;
 	} else
 		region.bmp8 = wrapbmp;
+
+#ifdef K2DEBUG
+    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "gap_override_internal: %d",
+                        gap_override_internal);
+#endif
+
 	if (gap_override_internal > 0) {
 		region.r1 = wrapbmp_base - wrapbmp_rhmax + 1;
 		if (region.r1 < 0)
@@ -5126,14 +5254,32 @@ static void wrapbmp_flush(MASTERINFO *masterinfo, int allow_full_justification,
 #ifdef WILLUSDEBUG
 	printf("wf:  gap=%d\n",gap);
 #endif
+#ifdef K2DEBUG
+    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "gap: %d",
+                        gap);
+#endif
+
 	if (gap > 0)
 		dst_add_gap_src_pixels("wrapbmp", masterinfo, gap);
+
+#ifdef K2DEBUG
+    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "After add gap: %d",
+                        gap);
+#endif
+
 	if (!allow_full_justification)
 		just = (wrapbmp_just & 0xcf) | 0x20;
 	else
 		just = wrapbmp_just;
+
+#ifdef K2DEBUG
+    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "before region add");
+#endif
 	bmpregion_add(&region, NULL, masterinfo, 0, 0, 0, -1.0, just, 2, colcount,
 			rowcount, pageinfo, 0xf, wrapbmp->height - 1 - wrapbmp_base);
+#ifdef K2DEBUG
+    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "after region add");
+#endif
 	if (wrapbmp->bpp == 24)
 		bmp_free(bmp8);
 	willus_dmem_free(20, (double **) &rowcount, funcname);
@@ -5144,10 +5290,20 @@ static void wrapbmp_flush(MASTERINFO *masterinfo, int allow_full_justification,
 	wrapbmp_gap = -1;
 	wrapbmp_rhmax = -1;
 	wrapbmp_thmax = -1;
+
 	wrapbmp_hyphen.ch = -1;
+#ifdef K2DEBUG
+    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "use_bgi: %d", use_bgi);
+#endif
+
 	if (use_bgi == 1 && beginning_gap_internal > 0)
 		dst_add_gap_src_pixels("wrapbmp_bgi1", masterinfo,
 				beginning_gap_internal);
+
+#ifdef K2DEBUG
+    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "flush done! ");
+#endif
+
 	beginning_gap_internal = -1;
 	last_h5050_internal = -1;
 	if (use_bgi)
@@ -6438,10 +6594,23 @@ static void bmp_more_rows(WILLUSBITMAP *bmp, double ratio, int pixval)
 {
 	int new_height, new_bytes, bw;
 	static char *funcname = "bmp_more_rows";
+#ifdef K2DEBUG
+    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "original_height: %d", bmp->height);
+#endif
 
 	new_height = (int) (bmp->height * ratio + .5);
-	if (new_height <= bmp->height)
-		return;
+
+    /* BRUCE: BUG FIX HERE
+       when original height is 0, the new height will stick to 0,
+       causing the caller to freeze in while loop
+     */
+	if (new_height <= bmp->height) {
+        if (bmp->height == 0)
+            new_height = 1;
+        else
+            return;
+    }
+
 	bw = bmp_bytewidth(bmp);
 	new_bytes = bw * new_height;
 	if (new_bytes > bmp->size_allocated) {
@@ -6449,6 +6618,10 @@ static void bmp_more_rows(WILLUSBITMAP *bmp, double ratio, int pixval)
 				bmp->size_allocated, funcname, 10);
 		bmp->size_allocated = new_bytes;
 	}
+#ifdef K2DEBUG
+    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT>> ", "new_height: %d",
+                        new_height);
+#endif
 	/* Fill in */
 	memset(bmp_rowptr_from_top(bmp, bmp->height), pixval,
 			(new_height - bmp->height) * bw);
