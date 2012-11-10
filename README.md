@@ -54,8 +54,7 @@ Screenshots
 ## Reflow: ##
 ### Chinese reflow over scanned PDF ###
 
-  ![Before Reflow](https://github.com/kkspeed/orion-mod/raw/master/img/chn_1.png)
-
+  ![Before Reflow](https://github.com/kkspeed/orion-mod/raw/master/img/chn_1.png) \
   ![After Reflow](https://github.com/kkspeed/orion-mod/raw/master/img/chn_2.png) 
 
 ### English reflow over text PDF ###
