@@ -658,6 +658,7 @@ void k2pdfopt_mupdf_reflow(KOPTContext *kctx, fz_document *doc, fz_page *page, f
 	masterinfo = &_masterinfo;
 	bmp_init(src);
 	int status = bmpmupdf_pixmap_to_bmp(src, ctx, pix);
+
 	k2pdfopt_reflow_bmp(masterinfo, src);
 	bmp_free(src);
 

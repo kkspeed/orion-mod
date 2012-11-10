@@ -1320,8 +1320,14 @@ public class OrionViewerActivity extends OrionBaseActivity {
                     float word_space = Float.parseFloat(ws.getText().toString());
                     float quality = Float.parseFloat(ql.getText().toString());
 
-                    controller.setReflowParameters(zoom, dpi, columns, lastPageInfo.screenWidth,
-                                                   lastPageInfo.screenHeight, m_top,
+                    Display ds = getWindowManager().getDefaultDisplay();
+                    Common.d("X: " + ds.getWidth() + " Y: " + ds.getHeight());
+                    controller.setReflowParameters(zoom,
+                                                   dpi,
+                                                   columns,
+                                                   ds.getWidth(),
+                                                   ds.getHeight(),
+                                                   m_top,
                                                    m_bottom, m_left, m_right,
                                                    default_trim,
                                                    wrap_text,
