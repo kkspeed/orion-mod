@@ -45,7 +45,7 @@ How to build
   cd mupdf-1.1-source/android  
   ndk-build
 
-* copy libmupdf.so, liblept.so, libtess.so to orion-viewer/orion_viewer/libs/armeabi/
+* copy libmupdf.so lto orion-viewer/orion_viewer/libs/armeabi/
 
 * In orion-viewer/orion_viewer, configure your sdk_dir and run ant debug
 
