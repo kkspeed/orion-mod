@@ -115,5 +115,6 @@ public class MuPDFCore
                                            int rotation,
                                            float margin,
                                            float word_space,
-                                           float quality);
+                                           float quality,
+                                           int ocr_language);
 }

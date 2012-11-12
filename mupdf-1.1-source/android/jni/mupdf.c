@@ -47,6 +47,8 @@ int rf_enabled = 0;             /* Is reflow enabled */
 int rf_lastPage = -1;
 KOPTContext rf_context;
 
+const char* OCR_LANGUAGES[] = {"eng", "chi_sim"};
+
 JNIEXPORT void
 JNICALL Java_com_artifex_mupdf_MuPDFCore_setReflow(JNIEnv * env, jobject thiz,
                                                    jint reflow)
@@ -73,7 +75,8 @@ Java_com_artifex_mupdf_MuPDFCore_setReflowParameters(JNIEnv *env,
                                                      int rotation,
                                                      float margin,
                                                      float word_space,
-                                                     float quality)
+                                                     float quality,
+                                                     int ocr_language)
 {
     double m_l = m_left / 100.0 * pageWidth;
     double m_r = m_right / 100.0 * pageWidth;
@@ -116,11 +119,14 @@ Java_com_artifex_mupdf_MuPDFCore_setReflowParameters(JNIEnv *env,
     rf_context.bbox.x1 = (m_r > 0.1) ? (pageWidth - m_r - 1) : (pageWidth - 1);
     rf_context.bbox.y1 = (m_b > 0.1) ? (pageHeight - m_b - 1) : (pageHeight - 1);
 
+    rf_context.ocr_lang = ocr_language;
+
     LOGE("========> zoom: %f, dpi: %d, columns: %d, width: %d, height: %d"
          "top: %f, bottom: %f, left: %f, right: %f, trim: %d, wrap: %d, indent: %d, rot: %d,"
-         "margin: %f, word_space: %f, quality: %f",
+         "margin: %f, word_space: %f, quality: %f, ocr_language: %s",
          zoom, dpi, columns, bb_width, bb_height, m_t, m_b, m_l, m_r, default_trim,
-         wrap_text, indent, rotation, margin, word_space, quality);
+         wrap_text, indent, rotation, margin, word_space, quality,
+         OCR_LANGUAGES[rf_context.ocr_lang]);
 
     /* k2pdfopt_set_params_lite(zoom, dpi, columns, bb_width, bb_height, */
     /*                          m_t, m_b, m_l, m_r); */
@@ -872,24 +878,25 @@ Java_com_artifex_mupdf_MuPDFCore_getText(JNIEnv *env,
 	jstring * result;
 
     if (rf_enabled) {
-        char text[256];
+        char text[2048];
 
         LOGI("startX: %d, startY: %d, width: %d, height: %d", startX, startY,
              width, height);
 
-        int status = ocrtess_init("/sdcard/data/tesseract/", "eng", 1, stdout);
+        int status = ocrtess_init("/sdcard/data/tesseract/", OCR_LANGUAGES[rf_context.ocr_lang],
+                                  1, stdout);
 
         LOGI("======================= Initialized: %d", status);
 
         ocrtess_single_word_from_bmp8(text,
-                                      255,
+                                      2047,
                                       rf_context.bmp,
                                       startX,
                                       startY,
                                       startX + width,
                                       startY + height,
                                       1,
-                                      0,
+                                      1,
                                       1,
                                       NULL);
         LOGI("HERE");

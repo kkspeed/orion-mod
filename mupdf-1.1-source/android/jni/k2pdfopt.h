@@ -85,7 +85,11 @@ typedef struct KOPTContext {
     WILLUSBITMAP *bmp;
     uint8_t *data;
     fz_rect bbox;
+
+    int ocr_lang;
 } KOPTContext;
+
+
 
 void k2pdfopt_mupdf_reflow(KOPTContext *kc, fz_document *doc, fz_page *page, fz_context *ctx);
 /* void k2pdfopt_djvu_reflow(KOPTContext *kc, ddjvu_page_t *page, ddjvu_context_t *ctx, ddjvu_render_mode_t mode, ddjvu_format_t *fmt); */

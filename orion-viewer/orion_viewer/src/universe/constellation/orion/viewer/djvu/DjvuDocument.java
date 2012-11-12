@@ -119,7 +119,8 @@ public class DjvuDocument implements DocumentWrapper {
                                     int rotation,
                                     float margin,
                                     float word_space,
-                                    float quality) {
+                                    float quality,
+                                    int ocr_language) {
     }
 
     public native void setContrast(int contrast);

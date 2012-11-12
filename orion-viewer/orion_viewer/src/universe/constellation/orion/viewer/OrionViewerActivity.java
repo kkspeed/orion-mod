@@ -1322,6 +1322,9 @@ public class OrionViewerActivity extends OrionBaseActivity {
 
                     Display ds = getWindowManager().getDefaultDisplay();
                     Common.d("X: " + ds.getWidth() + " Y: " + ds.getHeight());
+
+                    Spinner sp_ocr = (Spinner) findMyViewById(R.id.reflow_ocr_language_spinner);
+                    int ocr_language = Integer.parseInt(getResources().getStringArray(R.array.reflow_ocr_languages)[sp_ocr.getSelectedItemPosition()].toString());
                     controller.setReflowParameters(zoom,
                                                    dpi,
                                                    columns,
@@ -1335,7 +1338,8 @@ public class OrionViewerActivity extends OrionBaseActivity {
                                                    rotation,
                                                    margin,
                                                    word_space,
-                                                   quality);
+                                                   quality,
+                                                   ocr_language);
                     changeReflowMode();
 
                     controller.changeMargins(cropBorders[0], cropBorders[2], cropBorders[1],

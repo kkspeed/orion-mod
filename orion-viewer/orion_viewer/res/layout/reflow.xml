@@ -84,6 +84,16 @@
                   android:entries="@array/orientation"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textSize="25sp"
+                  android:gravity="left"
+                  android:text="@string/reflow_ocr_language"/>
+        <Spinner  android:id="@+id/reflow_ocr_language_spinner"
+                  android:entries="@array/reflow_ocr_languages_desc"
+                  android:entryValues="@array/reflow_ocr_languages"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"/>
     </LinearLayout>
     <LinearLayout android:gravity="left"
                   android:layout_width="fill_parent"

@@ -160,4 +160,14 @@
         <item>@integer/layout_only_bottom_outside</item>
         <item>@integer/layout_always_inside</item>
     </string-array>
+
+    <string-array name="reflow_ocr_languages">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <string-array name="reflow_ocr_languages_desc">
+        <item>@string/reflow_ocr_english</item>
+        <item>@string/reflow_ocr_chinese_cn</item>
+    </string-array>
 </resources>

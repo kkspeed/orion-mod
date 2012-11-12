@@ -57,6 +57,10 @@
     <string name="reflow_margin">边缘空白 </string>
     <string name="reflow_word_space">词间距 </string>
     <string name="reflow_quality">画质</string>
+    <string name="reflow_ocr_language">选词语言</string>
+
+    <string name="reflow_ocr_english">英语</string>
+    <string name="reflow_ocr_chinese_cn">简体中文</string>
 
     <string name="orientation_default">默认</string>
     <string name="orientation_default_rotation">应用程序默认</string>
