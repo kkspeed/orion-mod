@@ -41,10 +41,10 @@ Notes
   in the future.
 
 * The reflow will destory part of orion-viewer's  functionality:
-  - Text selection: the reflow renders on a pure bitmap. Text selection can only be
-    made available if the reflow is rendered in native pdf format or with OCR. The 
-    k2pdfopt library has such functionalities but they are currently not adapted into
-    orion-viewer
+  - Text selection: Orion Viewer will auto-matically draw the next page when the last
+    patch of bitmap is reached and thus, it will override the current bitmap and the last
+    part cannot make words selection. This is rather strange behavior as k2pdfopt uses
+    one single "Masterinfo" to collect the data, which should be modified in the future.
     
 How to build
 ------------
