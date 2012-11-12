@@ -31,7 +31,7 @@ Current tweaks
 
   https://code.google.com/p/tesseract-ocr/
 
-  
+
 Notes
 -------------
 * Make sure the page settings(zoom etc) are reset to default and the screen is
@@ -44,12 +44,12 @@ Notes
     patch of bitmap is reached and thus, it will override the current bitmap and the last
     part cannot make words selection. This is rather strange behavior as k2pdfopt uses
     one single "Masterinfo" to collect the data, which should be modified in the future.
-    
+
     This issue is fixed by adding a native LRU cache based on pages intead of bitmaps. It
     seems to work
 
 
-    
+
 Build and Usage
 ------------
 * User can download prebuilt version from release directory. In order to use OCR for
@@ -57,7 +57,7 @@ Build and Usage
   and copy the tesseract directory to /sdcard/data/
 
 * Build the mupdf library
-  cd mupdf-1.1-source/android  
+  cd mupdf-1.1-source/android
   ndk-build
 
 * copy libmupdf.so lto orion-viewer/orion_viewer/libs/armeabi/
@@ -70,11 +70,15 @@ Screenshots
 ### Chinese reflow over scanned PDF ###
 
   ![Before Reflow](https://github.com/kkspeed/orion-mod/raw/master/img/chn_1.png) \
-  ![After Reflow](https://github.com/kkspeed/orion-mod/raw/master/img/chn_2.png) 
+  ![After Reflow](https://github.com/kkspeed/orion-mod/raw/master/img/chn_2.png)
 
 ### English reflow over text PDF ###
 
   ![Before Reflow](https://github.com/kkspeed/orion-mod/raw/master/img/eng_1.png)
 
-  ![After Reflow](https://github.com/kkspeed/orion-mod/raw/master/img/eng_2.png) 
+  ![After Reflow](https://github.com/kkspeed/orion-mod/raw/master/img/eng_2.png)
 
+### OCR Words Extraction ###
+  ![Scanned PDF](https://github.com/kkspeed/orion-mod/raw/master/img/ocr-1.png)
+
+  ![Scanned PDF OCR Words](https://github.com/kkspeed/orion-mod/raw/master/img/ocr-2.png)
