@@ -859,13 +859,38 @@ Java_com_artifex_mupdf_MuPDFCore_getPageLink(JNIEnv * env, jobject thiz, int pag
 }
 
 
-
-
 JNIEXPORT jstring JNICALL
-Java_com_artifex_mupdf_MuPDFCore_getText(JNIEnv *env, jobject thiz, int pageNumber,
-		int startX, int startY, int width, int height)
+Java_com_artifex_mupdf_MuPDFCore_getText(JNIEnv *env,
+                                         jobject thiz,
+                                         int pageNumber,
+                                         int startX,
+                                         int startY,
+                                         int width,
+                                         int height)
 {
 	LOGI("==================Start Text Extraction==============");
+	jstring * result;
+
+    if (rf_enabled) {
+        char text[256];
+        ocrtess_init(NULL, NULL, 3, NULL);
+        ocrtess_single_word_from_bmp8(text,
+                                      255,
+                                      rf_context.bmp,
+                                      startX,
+                                      startY,
+                                      startX + width,
+                                      startY + height,
+                                      3,
+                                      0,
+                                      1,
+                                      NULL);
+		result = (*env)->NewStringUTF(env, text);
+        LOGI("OCR WORDS: %s\n", text);
+        ocrtess_end();
+        return result;
+    }
+
 	fz_display_list *pageList = NULL;
 	fz_page *currentPagex = NULL;
 
@@ -877,7 +902,7 @@ Java_com_artifex_mupdf_MuPDFCore_getText(JNIEnv *env, jobject thiz, int pageNumb
 	clock_t start, end;
 	double elapsed;
 
-	jstring * result;
+
 
 	LOGI("Start text extraction: rectangle=[%d,%d,%d,%d]", startX, startY, width, height);
 

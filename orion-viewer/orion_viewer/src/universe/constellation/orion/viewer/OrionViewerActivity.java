@@ -1340,6 +1340,7 @@ public class OrionViewerActivity extends OrionBaseActivity {
 
                     controller.changeMargins(cropBorders[0], cropBorders[2], cropBorders[1],
                                              cropBorders[3], false, cropBorders[4], cropBorders[5]);
+//                    controller.changeMargins(0, 0, 0, 0, false, 0, 0);
                     onAnimatorCancel();
                 }
             });

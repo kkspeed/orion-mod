@@ -195,18 +195,7 @@ typedef struct {
 	int n, na;
 } BREAKINFO;
 
-typedef struct {
-	int red[256];
-	int green[256];
-	int blue[256];
-	unsigned char *data; /* Top to bottom in native type, bottom to */
-	/* top in Win32 type.                      */
-	int width; /* Width of image in pixels */
-	int height; /* Height of image in pixels */
-	int bpp; /* Bits per pixel (only 8 or 24 allowed) */
-	int size_allocated;
-	int type; /* See defines above for WILLUSBITMAP_TYPE_... */
-} WILLUSBITMAP;
+
 
 typedef struct {
 	int r1, r2; /* row position from top of bmp, inclusive */
@@ -434,11 +423,11 @@ static int vert_line_erase(WILLUSBITMAP *bmp, WILLUSBITMAP *cbmp,
 		WILLUSBITMAP *tmp, int row0, int col0, double tanthx,
 		double minheight_in, double minwidth_in, double maxwidth_in,
 		int white_thresh);
-static void willus_dmem_alloc_warn(int index, void **ptr, int size,
-		char *funcname, int exitcode);
-static void willus_dmem_free(int index, double **ptr, char *funcname);
-static int willus_mem_alloc_warn(void **ptr, int size, char *name, int exitcode);
-static void willus_mem_free(double **ptr, char *name);
+/* static void willus_dmem_alloc_warn(int index, void **ptr, int size, */
+/* 		char *funcname, int exitcode); */
+/* static void willus_dmem_free(int index, double **ptr, char *funcname); */
+/* static int willus_mem_alloc_warn(void **ptr, int size, char *name, int exitcode); */
+/* static void willus_mem_free(double **ptr, char *name); */
 static void sortd(double *x, int n);
 static void sorti(int *x, int n);
 static void bmp_init(WILLUSBITMAP *bmap);
@@ -447,7 +436,7 @@ static void bmp_free(WILLUSBITMAP *bmap);
 static int bmp_copy(WILLUSBITMAP *dest, WILLUSBITMAP *src);
 static void bmp_fill(WILLUSBITMAP *bmp,int r,int g,int b);
 static int bmp_bytewidth(WILLUSBITMAP *bmp);
-static unsigned char *bmp_rowptr_from_top(WILLUSBITMAP *bmp, int row);
+//unsigned char *bmp_rowptr_from_top(WILLUSBITMAP *bmp, int row);
 static void bmp_more_rows(WILLUSBITMAP *bmp, double ratio, int pixval);
 static int bmp_is_grayscale(WILLUSBITMAP *bmp);
 static int bmp_resample(WILLUSBITMAP *dest, WILLUSBITMAP *src, double x1,
@@ -667,6 +656,7 @@ void k2pdfopt_mupdf_reflow(KOPTContext *kctx, fz_document *doc, fz_page *page, f
 	kctx->page_width = masterinfo->bmp.width;
 	kctx->page_height = masterinfo->rows;
 	kctx->data = masterinfo->bmp.data;
+    kctx->bmp = &masterinfo;
 }
 
 /* void k2pdfopt_djvu_reflow(KOPTContext *kctx, ddjvu_page_t *page, ddjvu_context_t *ctx, \ */
@@ -6107,7 +6097,7 @@ static int vert_line_erase(WILLUSBITMAP *bmp, WILLUSBITMAP *cbmp,
  */
 static int mem_index_min = 999;
 static int mem_index_max = 999;
-static void willus_dmem_alloc_warn(int index, void **ptr, int size,
+void willus_dmem_alloc_warn(int index, void **ptr, int size,
 		char *funcname, int exitcode)
 
 {
@@ -6122,7 +6112,7 @@ static void willus_dmem_alloc_warn(int index, void **ptr, int size,
 		willus_mem_alloc_warn(ptr, size, funcname, exitcode);
 }
 
-static void willus_dmem_free(int index, double **ptr, char *funcname)
+void willus_dmem_free(int index, double **ptr, char *funcname)
 
 {
 	if ((*ptr) == NULL)
@@ -6148,7 +6138,7 @@ static void willus_dmem_free(int index, double **ptr, char *funcname)
 ** compilers, like Turbo C, these are different.
 **
 */
-static int willus_mem_alloc(double **ptr,long size,char *name)
+int willus_mem_alloc(double **ptr,long size,char *name)
 
     {
 #if (defined(WIN32) && !defined(__DMC__))
@@ -6229,7 +6219,7 @@ static void mem_warn(char *name,int size,int exitcode)
         }
     }
 
-static int willus_mem_alloc_warn(void **ptr, int size, char *name, int exitcode)
+int willus_mem_alloc_warn(void **ptr, int size, char *name, int exitcode)
 
 {
 	int status;
@@ -6240,7 +6230,7 @@ static int willus_mem_alloc_warn(void **ptr, int size, char *name, int exitcode)
 	return (status);
 }
 
-static void willus_mem_free(double **ptr, char *name)
+void willus_mem_free(double **ptr, char *name)
 
 {
 	if ((*ptr) != NULL) {
@@ -6299,7 +6289,7 @@ static int willus_mem_realloc_robust(double **ptr,long newsize,long oldsize,char
     }
 
 
-static int willus_mem_realloc_robust_warn(void **ptr,int newsize,int oldsize,char *name,
+int willus_mem_realloc_robust_warn(void **ptr,int newsize,int oldsize,char *name,
                                 int exitcode)
 
     {
@@ -6577,7 +6567,8 @@ static int bmp_bytewidth(WILLUSBITMAP *bmp) {
  ** row==bmp->height-1 ==> bottom row of bitmap
  ** (regardless of bitmap type)
  */
-static unsigned char *bmp_rowptr_from_top(WILLUSBITMAP *bmp, int row)
+// BRUCE
+unsigned char *bmp_rowptr_from_top(WILLUSBITMAP *bmp, int row)
 
 {
 	if (bmp->type == WILLUSBITMAP_TYPE_WIN32)
@@ -7620,4 +7611,47 @@ static void wpdfboxes_add_box(WPDFBOXES *boxes, WPDFBOX *box)
 		boxes->na = newsize;
 	}
 	boxes->box[boxes->n++] = (*box);
+}
+
+void clean_line(char *buf)
+
+{
+    int     i,j;
+
+    for (i=0;buf[i]!='\n' && buf[i]!='\r' && buf[i]!='\0';i++);
+    for (i--;i>=0 && (buf[i]==' ' || buf[i]=='\t');i--);
+    buf[i+1]='\0';
+    for (i=0;buf[i]==' ' || buf[i]=='\t';i++);
+    if (i)
+    {
+        for (j=0;buf[i]!='\0';j++,i++)
+            buf[j]=buf[i];
+        buf[j]='\0';
+    }
+}
+
+
+int in_string(char *buffer,char *pattern)
+
+{
+    int     i,lp,lb;
+
+    lp=strlen(pattern);
+    lb=strlen(buffer);
+    if (lb<lp)
+        return(-1);
+    for (i=0;i<=lb-lp;i++)
+        if (!strnicmp(&buffer[i],pattern,lp))
+            return(i);
+    return(-1);
+}
+
+int strnicmp(const char *s1,const char *s2,int n)
+{
+    int i;
+
+    for (i=0;i<n && s1[i]!='\0' && s2[i]!='\0';i++)
+        if (tolower(s1[i])!=tolower(s2[i]))
+            break;
+    return(i>=n ? 0 : tolower(s1[i])-tolower(s2[i]));
 }
