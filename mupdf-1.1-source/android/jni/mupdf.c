@@ -873,7 +873,14 @@ Java_com_artifex_mupdf_MuPDFCore_getText(JNIEnv *env,
 
     if (rf_enabled) {
         char text[256];
-        ocrtess_init(NULL, NULL, 3, NULL);
+
+        LOGI("startX: %d, startY: %d, width: %d, height: %d", startX, startY,
+             width, height);
+
+        int status = ocrtess_init("/sdcard/data/tesseract/", "eng", 1, stdout);
+
+        LOGI("======================= Initialized: %d", status);
+
         ocrtess_single_word_from_bmp8(text,
                                       255,
                                       rf_context.bmp,
@@ -881,10 +888,12 @@ Java_com_artifex_mupdf_MuPDFCore_getText(JNIEnv *env,
                                       startY,
                                       startX + width,
                                       startY + height,
-                                      3,
+                                      1,
                                       0,
                                       1,
                                       NULL);
+        LOGI("HERE");
+
 		result = (*env)->NewStringUTF(env, text);
         LOGI("OCR WORDS: %s\n", text);
         ocrtess_end();

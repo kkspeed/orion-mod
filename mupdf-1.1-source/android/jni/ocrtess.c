@@ -24,6 +24,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <android/log.h>
 #include "leptonica.h"
 #include "tesseract.h"
 #include "k2pdfopt.h"
@@ -36,77 +37,114 @@ static void endian_flip(char *x,int n);
 */
 int ocrtess_init(char *datadir,char *lang,int ocr_type,FILE *out)
 
-    {
+{
     return(tess_capi_init(datadir,lang,ocr_type,out));
-    }
+}
 
 
 void ocrtess_end(void)
 
-    {
+{
     tess_capi_end();
-    }
+}
 
 /*
 ** bmp8 must be grayscale
 ** (x1,y1) and (x2,y2) from top left of bitmap
 */
 void ocrtess_single_word_from_bmp8(char *text,int maxlen,WILLUSBITMAP *bmp8,
-                                int x1,int y1,int x2,int y2,
-                                int ocr_type,int allow_spaces,
-                                int std_proc,FILE *out)
+                                   int x1,int y1,int x2,int y2,
+                                   int ocr_type,int allow_spaces,
+                                   int std_proc,FILE *out)
 
-    {
+{
     PIX *pix;
     int i,w,h,dw,dh,bw,status;
     unsigned char *src,*dst;
 
     if (x1>x2)
-        {
-        w=x1;
-        x1=x2;
-        x2=w;
-        }
-    w=x2-x1+1;
-    bw=w/40;
-    if (bw<6)
-        bw=6;
-    dw=w+bw*2;
-    dw=(dw+3)&(~3);
+    {
+        w = x1;
+        x1 = x2;
+        x2 = w;
+    }
+
+    w = x2-x1+1;
+    bw = w/40;
+
+    if (bw < 6)
+        bw = 6;
+
+    dw = w + bw * 2;
+    dw = (dw + 3) & (~3);
+
     if (y1>y2)
-        {
-        h=y1;
-        y1=y2;
-        y2=h;
-        }
-    h=y2-y1+1;
-    dh=h+bw*2;
-    pix=pixCreate(dw,dh,8);
-    src=bmp_rowptr_from_top(bmp8,y1)+x1;
-    dst=(unsigned char *)pixGetData(pix);
-    memset(dst,255,dw*dh);
-    dst=(unsigned char *)pixGetData(pix);
-    dst += bw + dw*bw;
-    for (i=y1;i<=y2;i++,dst+=dw,src+=bmp8->width)
-        memcpy(dst,src,w);
-    endian_flip((char *)pixGetData(pix),pixGetWpl(pix)*pixGetHeight(pix));
-    status=tess_capi_get_ocr(pix,text,maxlen,out);
+    {
+        h = y1;
+        y1 = y2;
+        y2 = h;
+    }
+
+    h = y2 - y1 + 1;
+    dh = h + bw * 2;
+
+    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT - OCR>> ", "BEFORE CREATE");
+
+    pix = pixCreate(dw, dh, 8);
+
+    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT - OCR>> ", "AFTER CREATE");
+
+    src = bmp_rowptr_from_top(bmp8, y1) + x1;
+
+    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT - OCR>> ", "BEFORE FROM TOP");
+
+    dst = (unsigned char *)pixGetData(pix);
+
+    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT - OCR>> ", "AFTER GET DATA");
+
+    memset(dst, 255, dw*dh);
+
+    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT - OCR>> ", "AFTER MEMSET");
+
+    dst = (unsigned char *)pixGetData(pix);
+
+    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT - OCR>> ", "AFTER ANOTHER GET");
+
+    dst += bw + dw * bw;
+
+    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT - OCR>> CONDITION", "dw: %d, src_inc: %d", dw, bmp8->width);
+
+    for (i=y1; i<=y2; i++, dst+=dw, src+=bmp8->width)
+        memcpy(dst, src, w);
+
+    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT - OCR>> ", "AFTER MEMCOPY");
+
+    endian_flip((char *)pixGetData(pix), pixGetWpl(pix) * pixGetHeight(pix));
+
+    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT - OCR>> ", "BEFORE OCR");
+
+    status = tess_capi_get_ocr(pix, text, maxlen, out);
+
+    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT - OCR>> ", "AFTER OCR");
     pixDestroy(&pix);
+
     if (status<0)
         text[0]='\0';
+
     clean_line(text);
+
     if (std_proc)
         ocr_text_proc(text,allow_spaces);
-    }
+}
 
 
 static void endian_flip(char *x,int n)
 
-    {
+{
     int i;
 
     for (i=0;i<n;i++,x+=4)
-        {
+    {
         int c;
         c=x[0];
         x[0]=x[3];
@@ -114,5 +152,5 @@ static void endian_flip(char *x,int n)
         c=x[1];
         x[1]=x[2];
         x[2]=c;
-        }
     }
+}

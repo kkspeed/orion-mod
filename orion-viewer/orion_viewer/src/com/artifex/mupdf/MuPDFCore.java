@@ -10,7 +10,10 @@ public class MuPDFCore
 {
 	/* load our native library */
 	static {
-		System.loadLibrary("mupdf");
+        //System.loadLibrary("jnigraphics");
+        System.loadLibrary("lept");
+        System.loadLibrary("tess");
+        System.loadLibrary("mupdf");
 	}
 
 	/* Readable members */

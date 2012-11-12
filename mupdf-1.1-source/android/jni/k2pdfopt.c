@@ -656,7 +656,7 @@ void k2pdfopt_mupdf_reflow(KOPTContext *kctx, fz_document *doc, fz_page *page, f
 	kctx->page_width = masterinfo->bmp.width;
 	kctx->page_height = masterinfo->rows;
 	kctx->data = masterinfo->bmp.data;
-    kctx->bmp = &masterinfo;
+    kctx->bmp = &(masterinfo->bmp);
 }
 
 /* void k2pdfopt_djvu_reflow(KOPTContext *kctx, ddjvu_page_t *page, ddjvu_context_t *ctx, \ */
