@@ -58,6 +58,15 @@ typedef struct
     int n,na;
 } OCRWORDS;
 
+typedef struct {
+	WILLUSBITMAP bmp;
+	int rows;
+	int published_pages;
+	int bgcolor;
+	int fit_to_page;
+	int wordcount;
+	char debugfolder[256];
+} MASTERINFO;
 
 typedef struct KOPTContext {
     int trim;
@@ -91,7 +100,8 @@ typedef struct KOPTContext {
 
 
 
-void k2pdfopt_mupdf_reflow(KOPTContext *kc, fz_document *doc, fz_page *page, fz_context *ctx);
+//void k2pdfopt_mupdf_reflow(KOPTContext *kc, fz_document *doc, fz_page *page, fz_context *ctx);
+void k2pdfopt_mupdf_reflow(KOPTContext *kctx, fz_document *doc, fz_page *page, fz_context *ctx, MASTERINFO* masterinfo);
 /* void k2pdfopt_djvu_reflow(KOPTContext *kc, ddjvu_page_t *page, ddjvu_context_t *ctx, ddjvu_render_mode_t mode, ddjvu_format_t *fmt); */
 
 void ocrtess_single_word_from_bmp8(char *text,int maxlen,WILLUSBITMAP *bmp8,

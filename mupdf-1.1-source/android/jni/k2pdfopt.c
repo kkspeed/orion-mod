@@ -211,15 +211,7 @@ typedef struct {
 	WILLUSBITMAP *marked;
 } BMPREGION;
 
-typedef struct {
-	WILLUSBITMAP bmp;
-	int rows;
-	int published_pages;
-	int bgcolor;
-	int fit_to_page;
-	int wordcount;
-	char debugfolder[256];
-} MASTERINFO;
+
 
 static int verbose = 0;
 static int debug = 0;
@@ -585,7 +577,7 @@ static void k2pdfopt_init(KOPTContext *kctx) {
 	}
 }
 
-void k2pdfopt_mupdf_reflow(KOPTContext *kctx, fz_document *doc, fz_page *page, fz_context *ctx) {
+void k2pdfopt_mupdf_reflow(KOPTContext *kctx, fz_document *doc, fz_page *page, fz_context *ctx, MASTERINFO* masterinfo) {
 	fz_device *dev;
 	fz_pixmap *pix;
 	fz_rect bounds,bounds2;
@@ -617,25 +609,11 @@ void k2pdfopt_mupdf_reflow(KOPTContext *kctx, fz_document *doc, fz_page *page, f
 		zoom *= shrink_factor;
 		dpi *= shrink_factor;
 	} while (bbox.x1 > max_page_width_pix | bbox.y1 > max_page_height_pix);
-	//    ctm=fz_translate(0,-page->mediabox.y1);
-	//    ctm=fz_concat(ctm,fz_scale(dpp,-dpp));
-	//    ctm=fz_concat(ctm,fz_rotate(page->rotate));
-	//    ctm=fz_concat(ctm,fz_rotate(0));
-	//    bbox=fz_round_rect(fz_transform_rect(ctm,page->mediabox));
-	//    pix=fz_new_pixmap_with_rect(colorspace,bbox);
+
 	pix = fz_new_pixmap_with_bbox(ctx, fz_device_gray, bbox);
 	fz_clear_pixmap_with_value(ctx, pix, 0xff);
 	dev = fz_new_draw_device(ctx, pix);
-#ifdef MUPDF_TRACE
-	fz_device *tdev;
-	fz_try(ctx) {
-		tdev = fz_new_trace_device(ctx);
-		fz_run_page(doc, page, tdev, ctm, NULL);
-	}
-	fz_always(ctx) {
-		fz_free_device(tdev);
-	}
-#endif
+
 	fz_run_page(doc, page, dev, ctm, NULL);
 	fz_free_device(dev);
 
@@ -644,7 +622,6 @@ void k2pdfopt_mupdf_reflow(KOPTContext *kctx, fz_document *doc, fz_page *page, f
 	}
 
 	src = &_src;
-	masterinfo = &_masterinfo;
 	bmp_init(src);
 	int status = bmpmupdf_pixmap_to_bmp(src, ctx, pix);
 

@@ -27,8 +27,10 @@ Current tweaks
 
   https://github.com/chrox/libk2pdfopt
 
-* Able to select words(using OCR). 
-  put tesseract folder  onto your /sdcard/data/tesseract
+* Able to select words(using OCR). With k2pdfopt's builtin support for tesseract:
+
+  https://code.google.com/p/tesseract-ocr/
+
   
 Notes
 -------------
@@ -37,13 +39,23 @@ Notes
   in the future.
 
 * The reflow will destory part of orion-viewer's  functionality:
-  - Text selection: Orion Viewer will auto-matically draw the next page when the last
+  - FIXED:
+    Text selection: Orion Viewer will auto-matically draw the next page when the last
     patch of bitmap is reached and thus, it will override the current bitmap and the last
     part cannot make words selection. This is rather strange behavior as k2pdfopt uses
     one single "Masterinfo" to collect the data, which should be modified in the future.
     
-How to build
+    This issue is fixed by adding a native LRU cache based on pages intead of bitmaps. It
+    seems to work
+
+
+    
+Build and Usage
 ------------
+* User can download prebuilt version from release directory. In order to use OCR for
+  words selection in reflow mode, please download the tesseract-eng-chn.tar.gz, unpack it
+  and copy the tesseract directory to /sdcard/data/
+
 * Build the mupdf library
   cd mupdf-1.1-source/android  
   ndk-build

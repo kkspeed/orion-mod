@@ -26,6 +26,8 @@
 
 #define MAX_SEARCH_HITS (500)
 
+#define MAX_REFLOWED_PAGES 5
+
 
 
 
@@ -47,7 +49,34 @@ int rf_enabled = 0;             /* Is reflow enabled */
 int rf_lastPage = -1;
 KOPTContext rf_context;
 
+#define REFLOW_CACHE_HIT    0
+#define REFLOW_CACHE_MISS   -1
+
+MASTERINFO rf_pages[MAX_REFLOWED_PAGES];
+int rf_page_keys[MAX_REFLOWED_PAGES];
+
 const char* OCR_LANGUAGES[] = {"eng", "chi_sim"};
+
+static void invalidate_reflow_cache()
+{
+    int i;
+    for (i=0;i<MAX_REFLOWED_PAGES; i++) {
+        rf_page_keys[i] = -1;
+    }
+}
+
+static int require_reflow_cache(int page, int* p) {
+    *p = page % MAX_REFLOWED_PAGES;
+
+
+    if (rf_page_keys[*p] == page) {
+        LOGI("==================>>>> HIT page: %d, cache: %d", page, *p);
+        return REFLOW_CACHE_HIT;
+    }
+    LOGI("==================>>>> MISS page: %d, cache: %d", page, *p);
+    rf_page_keys[*p] = page;
+    return REFLOW_CACHE_MISS;
+}
 
 JNIEXPORT void
 JNICALL Java_com_artifex_mupdf_MuPDFCore_setReflow(JNIEnv * env, jobject thiz,
@@ -55,6 +84,8 @@ JNICALL Java_com_artifex_mupdf_MuPDFCore_setReflow(JNIEnv * env, jobject thiz,
 {
     rf_enabled = reflow;
     rf_lastPage = -1;
+
+    invalidate_reflow_cache();
 }
 
 JNIEXPORT jintArray JNICALL
@@ -142,6 +173,7 @@ Java_com_artifex_mupdf_MuPDFCore_openFile(JNIEnv * env, jobject thiz, jstring jf
 
     rf_enabled = 0;
     rf_lastPage = -1;
+    invalidate_reflow_cache();
 
 	filename = (*env)->GetStringUTFChars(env, jfilename, NULL);
 	if (filename == NULL)
@@ -251,10 +283,22 @@ Java_com_artifex_mupdf_MuPDFCore_gotoPageInternal(JNIEnv *env, jobject thiz, int
 
         /* When Reflow enabled, reflow the page and get different size */
         if (rf_enabled && (rf_lastPage != page)) {
-            k2pdfopt_mupdf_reflow(&rf_context, doc, currentPage, ctx);
-            rf_width = rf_context.page_width;
-            rf_height = rf_context.page_height;
+            MASTERINFO* ms;
+            int p;
+            int status = require_reflow_cache(page, &p);
+            if (status) {
+                ms = &rf_pages[p];
+                k2pdfopt_mupdf_reflow(&rf_context, doc, currentPage, ctx,
+                                      ms);
+            }
+
+            rf_width = rf_pages[p].bmp.width;
+            rf_height = rf_pages[p].rows;
+
+//            rf_width = rf_context.page_width;
+//            rf_height = rf_context.page_height;
 //            k2pdfopt_rfbmp_size(&rf_width, &rf_height);
+
             rf_lastPage = page;
         }
 
@@ -317,8 +361,9 @@ Java_com_artifex_mupdf_MuPDFCore_getPageInfo(JNIEnv *env, jobject thiz, int page
      * so that the page will be split into patches
      */
     if (rf_enabled) {
-        pageWidth = rf_width;
-        pageHeight = rf_height;
+        int p = page % MAX_REFLOWED_PAGES;
+        pageWidth = rf_pages[p].bmp.width;
+        pageHeight = rf_pages[p].rows;
     }
 
 	jclass cls = (*env)->GetObjectClass(env, info);
@@ -351,14 +396,16 @@ Java_com_artifex_mupdf_MuPDFCore_getPageHeight(JNIEnv *env, jobject thiz)
 void drawReflowedPage(unsigned char* buf, int pageW, int pageH,
                       int patchX, int patchY, int patchW, int patchH)
 {
-    uint8_t *pmptr = rf_context.data;
+    int p = currentPageNumber % MAX_REFLOWED_PAGES;
+
+    uint8_t *pmptr = rf_pages[p].bmp.data;
 
     pmptr += (patchY * patchW) + patchX;
 
     int i, k;
     int x, y;
     uint8_t color = 0;
-    int bmp_size = rf_width * rf_height;
+    int bmp_size =rf_pages[p].bmp.width * rf_pages[p].rows;
 
     for (y=0; y<pageH; y++) {
         for (x=0; x<pageW * 4; x+=4) {
@@ -879,18 +926,21 @@ Java_com_artifex_mupdf_MuPDFCore_getText(JNIEnv *env,
 
     if (rf_enabled) {
         char text[2048];
+        int p = pageNumber % MAX_REFLOWED_PAGES;
 
         LOGI("startX: %d, startY: %d, width: %d, height: %d", startX, startY,
              width, height);
 
-        int status = ocrtess_init("/sdcard/data/tesseract/", OCR_LANGUAGES[rf_context.ocr_lang],
-                                  1, stdout);
+        int status = ocrtess_init("/sdcard/data/tesseract/",
+                                  OCR_LANGUAGES[rf_context.ocr_lang],
+                                  1,
+                                  stdout);
 
         LOGI("======================= Initialized: %d", status);
 
         ocrtess_single_word_from_bmp8(text,
                                       2047,
-                                      rf_context.bmp,
+                                      &(rf_pages[p].bmp),
                                       startX,
                                       startY,
                                       startX + width,
