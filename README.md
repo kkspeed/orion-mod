@@ -27,12 +27,8 @@ Current tweaks
 
   https://github.com/chrox/libk2pdfopt
 
-* Able to select words(using OCR). Please un-tar the tesseract-ocr-3.01.eng.tar.gz and:
-
-  mkdir data
-  mv tesseract-ocr data/tesseract
-
-  put data folder  onto your /sdcard
+* Able to select words(using OCR). 
+  put tesseract folder  onto your /sdcard/data/tesseract
   
 Notes
 -------------
