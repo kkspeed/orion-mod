@@ -47,16 +47,16 @@
     <string name="short_click">On short click</string>
     <string name="binding_click">On binding</string>
     <string name="reflow_zoom">Zoom</string>
-    <string name="reflow_output_dpi">Output DPI</string>
-    <string name="reflow_indent">Preserve Indentation</string>
-    <string name="reflow_columns">Maximum Columns</string>
-    <string name="reflow_default_crop">Default crop(0.25 inch)</string>
+    <string name="reflow_output_dpi">ODPI</string>
+    <string name="reflow_indent">Indent</string>
+    <string name="reflow_columns">Max Cols</string>
+    <string name="reflow_default_crop">Crop 0.25\'</string>
     <string name="reflow_preserve_indent">Indent</string>
     <string name="reflow_wrap_text">Wrap</string>
-    <string name="reflow_rotation">Rotate</string>
-    <string name="reflow_margin">Margin </string>
-    <string name="reflow_word_space">Word Space </string>
-    <string name="reflow_quality">Quality</string>
+    <string name="reflow_rotation">Rot</string>
+    <string name="reflow_margin">Mar&#32;</string>
+    <string name="reflow_word_space">Ws&#32;</string>
+    <string name="reflow_quality">Qual&#32;</string>
     <string name="reflow_ocr_language">OCR Lang</string>
 
     <string name="reflow_ocr_english">English</string>

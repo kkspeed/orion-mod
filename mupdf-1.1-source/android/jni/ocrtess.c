@@ -88,50 +88,50 @@ void ocrtess_single_word_from_bmp8(char *text,int maxlen,WILLUSBITMAP *bmp8,
     h = y2 - y1 + 1;
     dh = h + bw * 2;
 
-    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT - OCR>> ", "BEFORE CREATE");
+//    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT - OCR>> ", "BEFORE CREATE");
 
     pix = pixCreate(dw, dh, 8);
 
-    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT - OCR>> ", "AFTER CREATE");
+//    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT - OCR>> ", "AFTER CREATE");
 
     src = bmp_rowptr_from_top(bmp8, y1) + x1;
 
-    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT - OCR>> ", "BEFORE FROM TOP");
+//    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT - OCR>> ", "BEFORE FROM TOP");
 
     dst = (unsigned char *)pixGetData(pix);
 
-    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT - OCR>> ", "AFTER GET DATA");
+//    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT - OCR>> ", "AFTER GET DATA");
 
     memset(dst, 255, dw*dh);
 
-    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT - OCR>> ", "AFTER MEMSET");
+//    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT - OCR>> ", "AFTER MEMSET");
 
     dst = (unsigned char *)pixGetData(pix);
 
-    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT - OCR>> ", "AFTER ANOTHER GET");
+//    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT - OCR>> ", "AFTER ANOTHER GET");
 
     dst += bw + dw * bw;
 
-    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT - OCR>> CONDITION", "dw: %d, src_inc: %d", dw, bmp8->width);
+//    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT - OCR>> CONDITION", "dw: %d, src_inc: %d", dw, bmp8->width);
 
     for (i=y1; i<=y2; i++, dst+=dw, src+=bmp8->width)
         memcpy(dst, src, w);
 
-    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT - OCR>> ", "AFTER MEMCOPY");
+//    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT - OCR>> ", "AFTER MEMCOPY");
 
     endian_flip((char *)pixGetData(pix), pixGetWpl(pix) * pixGetHeight(pix));
 
-    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT - OCR>> ", "BEFORE OCR");
+//    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT - OCR>> ", "BEFORE OCR");
 
     status = tess_capi_get_ocr(pix, text, maxlen, out);
 
-    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT - OCR>> ", "AFTER OCR");
+//    __android_log_print(ANDROID_LOG_INFO, "K2PDFOPT - OCR>> ", "AFTER OCR");
     pixDestroy(&pix);
 
     if (status<0)
         text[0]='\0';
 
-    clean_line(text);
+//    clean_line(text);
 
     if (std_proc)
         ocr_text_proc(text,allow_spaces);
