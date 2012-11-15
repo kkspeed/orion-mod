@@ -542,6 +542,7 @@ static void k2pdfopt_init(KOPTContext *kctx) {
 	src_rot = kctx->rotate;
 	src_dpi = (int)300*kctx->quality;
 	defect_size_pts = kctx->defect_size;
+    src_whitethresh = kctx->white_thresh;
 
 	if (kctx->trim == 0) {
 		mar_left = 0;
@@ -1157,8 +1158,8 @@ void adjust_contrast(WILLUSBITMAP *src, WILLUSBITMAP *srcgrey, int *white)
 		bmp_contrast_adjust(src, src, contrast);
 	bmp_free(dst);
 }
-
-static int bmpregion_row_black_count(BMPREGION *region, int r0)
+// OPTIMIZED
+static inline int bmpregion_row_black_count(BMPREGION *region, int r0)
 
 {
 	unsigned char *p;
@@ -6534,8 +6535,8 @@ static int bmp_copy(WILLUSBITMAP *dest, WILLUSBITMAP *src)
 	memcpy(dest->blue, src->blue, sizeof(int) * 256);
 	return (1);
 }
-
-static int bmp_bytewidth(WILLUSBITMAP *bmp) {
+// OPTIMIZED
+static inline int bmp_bytewidth(WILLUSBITMAP *bmp) {
 	return (bmp->bpp == 24 ? bmp->width * 3 : bmp->width);
 }
 
@@ -6544,8 +6545,8 @@ static int bmp_bytewidth(WILLUSBITMAP *bmp) {
  ** row==bmp->height-1 ==> bottom row of bitmap
  ** (regardless of bitmap type)
  */
-// BRUCE
-unsigned char *bmp_rowptr_from_top(WILLUSBITMAP *bmp, int row)
+// OPTIMIZED
+inline unsigned char *bmp_rowptr_from_top(WILLUSBITMAP *bmp, int row)
 
 {
 	if (bmp->type == WILLUSBITMAP_TYPE_WIN32)
@@ -6596,8 +6597,8 @@ static void bmp_more_rows(WILLUSBITMAP *bmp, double ratio, int pixval)
 			(new_height - bmp->height) * bw);
 	bmp->height = new_height;
 }
-
-static double resample_single(double *y,double x1,double x2)
+// OPTIMIZED
+static inline double resample_single(double *y,double x1,double x2)
 
     {
     int i,i1,i2;
@@ -6630,9 +6631,9 @@ static double resample_single(double *y,double x1,double x2)
 **                dst[0] and dst[1] would get src[0].
 **                dst[2] and dst[3] would get src[1].
 **                and so on.
-**
+** OPTIMIZED
 */
-static void resample_1d(double *dst,double *src,double x1,double x2,
+static inline void resample_1d(double *dst,double *src,double x1,double x2,
                         int n)
 
     {

@@ -91,11 +91,12 @@ public class PdfDocument implements DocumentWrapper {
                                     float margin,
                                     float word_space,
                                     float quality,
-                                    int ocr_language) {
+                                    int ocr_language,
+                                    int white_thresh) {
         core.setReflowParameters(zoom, dpi, columns, bb_width, bb_height,
                                  m_top, m_bottom, m_left, m_right, default_trim,
                                  wrap_text, indent, rotation, margin, word_space,
-                                 quality, ocr_language);
+                                 quality, ocr_language, white_thresh);
     }
 
 	public void setThreshold(int threshold) {

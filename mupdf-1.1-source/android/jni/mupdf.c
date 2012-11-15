@@ -107,7 +107,8 @@ Java_com_artifex_mupdf_MuPDFCore_setReflowParameters(JNIEnv *env,
                                                      float margin,
                                                      float word_space,
                                                      float quality,
-                                                     int ocr_language)
+                                                     int ocr_language,
+                                                     int white_thresh)
 {
     double m_l = m_left / 100.0 * pageWidth;
     double m_r = m_right / 100.0 * pageWidth;
@@ -144,6 +145,8 @@ Java_com_artifex_mupdf_MuPDFCore_setReflowParameters(JNIEnv *env,
     rf_context.defect_size = 1.0;
     rf_context.line_spacing = -1.2;
     rf_context.word_spacing = word_space;
+
+    rf_context.white_thresh = white_thresh;
 
     rf_context.bbox.x0 = (m_l > 0.1) ? m_l : 0;
     rf_context.bbox.y0 = (m_t > 0.1) ? m_t : 0;

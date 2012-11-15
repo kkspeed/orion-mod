@@ -66,7 +66,8 @@ public interface DocumentWrapper {
                              float margin,
                              float word_space,
                              float quality,
-                             int ocr_language);
+                             int ocr_language,
+                             int white_thresh);
 
 	public OutlineItem[] getOutline();
 }

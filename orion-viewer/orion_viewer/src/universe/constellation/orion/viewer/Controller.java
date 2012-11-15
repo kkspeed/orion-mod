@@ -329,7 +329,7 @@ public class Controller {
         doc.setReflowParameters(zoom, dpi, columns, bb_width, bb_height,
                                 m_top, m_bottom, m_left, m_right, default_trim,
                                 wrap_text, indent, rotation, margin, word_space,
-                                quality, ocr_language);
+                                quality, ocr_language, this.threshold);
     }
 
     public void setReflow(int reflow) {

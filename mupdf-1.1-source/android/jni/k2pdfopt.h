@@ -82,6 +82,7 @@ typedef struct KOPTContext {
     int page_height;
     int straighten;
     int justification;
+    int white_thresh;
 
     double zoom;
     double margin;
