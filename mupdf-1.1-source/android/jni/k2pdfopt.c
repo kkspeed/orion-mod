@@ -524,6 +524,8 @@ static void k2pdfopt_reflow_bmp(MASTERINFO *masterinfo, WILLUSBITMAP *src) {
 	masterinfo->fit_to_page = dst_fit_to_page;
 	/* Check to see if master bitmap might need more room */
 	bmpregion_source_page_add(&region, masterinfo, 1, pageinfo, (int) (0.25 * src_dpi + .5));
+// MODIFIED
+	wrapbmp_flush(masterinfo, 0, pageinfo, 0);
 
 	bmp_free(srcgrey);
 	if (pageinfo != NULL)
